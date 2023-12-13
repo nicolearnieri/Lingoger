@@ -13,13 +13,13 @@ public class EmailSender {
     public static void sendEmail(String recipient, String subject, String body) {
         // Creazione dell'oggetto Email utilizzando Simple Java Mail
         Email email = EmailBuilder.startingBlank()
-                .from(username) // In Gmail, l'indirizzo e-mail del mittente deve corrispondere al nome utente (username).
-                .to(recipient)
-                .withSubject(subject)
-                .withPlainText(body)
-                .buildEmail();
+                .from(username) // Indirizzo e-mail del mittente
+                .to(recipient) // Indirizzo e-mail del destinatario
+                .withSubject(subject) // Oggetto dell'e-mail
+                .withPlainText(body) // Corpo dell'e-mail
+                .buildEmail(); // Creazione dell'oggetto Email
 
-        // Configurazione del Mailer per inviare l'e-mail utilizzando il server SMTP di Gmail
+        // Configurazione del Mailer per inviare l'e-mail utilizzando il server SMTP di libero
         Mailer mailer = MailerBuilder.withSMTPServer("smtp.libero.it", 587, username, password)
                 .withTransportStrategy(TransportStrategy.SMTP_TLS) // Usa TLS per la crittografia
                 .buildMailer();
