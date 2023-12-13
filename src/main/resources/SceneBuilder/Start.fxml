@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/Isabelle.png" />
+                  <Image url="@../images/Isabelle.png" />
                </image>
                <HBox.margin>
                   <Insets right="40.0" />
@@ -26,7 +26,7 @@
                <children>
                   <ImageView fitHeight="91.0" fitWidth="271.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/logo.png" />
+                        <Image url="@../images/logo.png" />
                      </image>
                   </ImageView>
                   <Label text="Apprendere le lingue non è mai stato così facile.">
