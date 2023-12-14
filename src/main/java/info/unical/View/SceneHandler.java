@@ -24,7 +24,6 @@ public class SceneHandler
     private Stage logInOrSignUpStage;
 
     private String theme = "LingogerTheme";
-    private String font = "FontPoppins";
 
     private static SceneHandler instance = null;
 
@@ -35,12 +34,12 @@ public class SceneHandler
         if(stage != null) return;
 
         stage = primaryStage;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "HomeInterface.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "Start.fxml"));
         scene = new Scene(loader.load(), 900, 700); //v:larghezza, v1:altezza
         StartController controller= loader.getController();
         changedTheme(scene);
         stage.setTitle("DeliverBoo");
-        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Icone/Ghost.png")));// Carica l'immagine dell'icona dall'URL relativo nel tuo progetto
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
         stage.getIcons().add(icon); // Imposta l'icona per la finestra
         stage.setScene(scene);
         stage.show();

@@ -1,3 +1,9 @@
+*{
+    -fx-font-family: 'Poppins';
+
+}
+
+
 .root {
     -fx-background-color: #ffcda3;
 }
@@ -7,3 +13,4 @@
     -fx-text-fill: #ffdcc9;
 
 }
+
