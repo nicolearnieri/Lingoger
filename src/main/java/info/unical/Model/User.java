@@ -5,6 +5,7 @@ public class User
     private static User instance;
     private String nomeUtente;
     private String email;
+    private String language="inglese";
 
     private boolean access = false;
 
@@ -12,6 +13,7 @@ public class User
     private User() {}
 
     public String getNomeUtente() {return nomeUtente;}
+
 
     public void setNomeUtente(String nomeUtente) {this.nomeUtente = nomeUtente;}
     public String getEmail() {return email;}
@@ -36,6 +38,7 @@ public class User
         this.email = null;
         this.nomeUtente = null;
         this.access= false;
+        this.language =null;
     }
 
 }

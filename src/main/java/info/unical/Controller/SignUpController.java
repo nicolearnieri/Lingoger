@@ -1,11 +1,9 @@
 package info.unical.Controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class SignUpController {
 
@@ -19,7 +17,7 @@ public class SignUpController {
     private TextField emailLabel;
 
     @FXML
-    private ChoiceBox<?> languageChooser;
+    private ComboBox<String> languageChooser;
 
     @FXML
     private PasswordField passwordField;
@@ -36,4 +34,12 @@ public class SignUpController {
     @FXML
     private TextField usernameLabel;
 
+    static ObservableList<String> languageList = FXCollections.observableArrayList("Inglese","Francese");
+
+
+   public void init()
+   {
+       languageChooser.setItems(languageList);
+
+   }
 }

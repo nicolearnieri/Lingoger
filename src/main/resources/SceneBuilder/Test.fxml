@@ -17,7 +17,7 @@
                   <Insets left="10.0" />
                </HBox.margin>
                <font>
-                  <Font name="Agency FB Bold" size="24.0" />
+                  <Font name="Calibri Bold" size="24.0" />
                </font>
             </Label>
          </children>
@@ -33,15 +33,15 @@
                         <Label fx:id="question1" text="Question 1 :" />
                         <HBox alignment="CENTER" prefHeight="123.0" prefWidth="614.0">
                            <children>
-                              <Button fx:id="q1First" mnemonicParsing="false" onAction="#q1click1" text="Button">
+                              <Button fx:id="q1First" mnemonicParsing="false" onAction="#q1click1" prefHeight="55.0" prefWidth="100.0" text="Button">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin></Button>
-                            <Button fx:id="q1Second" mnemonicParsing="false" onAction="#q1click2" text="Button">
+                            <Button fx:id="q1Second" mnemonicParsing="false" onAction="#q1click2" prefHeight="55.0" prefWidth="100.0" text="Button">
                                  <HBox.margin>
                                     <Insets left="25.0" right="25.0" />
                                  </HBox.margin></Button>
-                              <Button fx:id="q1Third" mnemonicParsing="false" onAction="#q1click3" text="Button" />
+                              <Button fx:id="q1Third" mnemonicParsing="false" onAction="#q1click3" prefHeight="55.0" prefWidth="100.0" text="Button" />
                            </children>
                         </HBox>
                      </children>
@@ -55,12 +55,12 @@
                         <Label fx:id="question2" text="Question 2:" />
                         <HBox alignment="CENTER" prefHeight="126.0" prefWidth="614.0">
                            <children>
-                              <Button fx:id="q2First" mnemonicParsing="false" onAction="#q2click1" text="Button" />
-                              <Button fx:id="q2Second" mnemonicParsing="false" onAction="#q2click2" text="Button">
+                              <Button fx:id="q2First" mnemonicParsing="false" onAction="#q2click1" prefHeight="55.0" prefWidth="100.0" text="Button" />
+                              <Button fx:id="q2Second" mnemonicParsing="false" onAction="#q2click2" prefHeight="55.0" prefWidth="100.0" text="Button">
                                  <HBox.margin>
                                     <Insets left="25.0" right="25.0" />
                                  </HBox.margin></Button>
-                              <Button fx:id="q2Third" mnemonicParsing="false" onAction="#q2click3" text="Button" />
+                              <Button fx:id="q2Third" mnemonicParsing="false" onAction="#q2click3" prefHeight="55.0" prefWidth="100.0" text="Button" />
                            </children>
                         </HBox>
                      </children>
@@ -74,29 +74,16 @@
                         <Label fx:id="question3" text="Question 3:" />
                         <HBox alignment="CENTER" prefHeight="160.0" prefWidth="614.0">
                            <children>
-                              <Button fx:id="q3First" mnemonicParsing="false" onAction="#q3click1" prefHeight="70.0" prefWidth="120.0">
+                              <Button fx:id="q3First" mnemonicParsing="false" onAction="#q3click1" prefHeight="55.0" prefWidth="100.0">
                                  <HBox.margin>
                                     <Insets right="25.0" />
                                  </HBox.margin>
-                                 <graphic>
-                                    <VBox prefHeight="45.0" prefWidth="100.0" />
-                                 </graphic>
                               </Button>
-                              <Button fx:id="q3Second" mnemonicParsing="false" onAction="#q3click2" prefHeight="70.0" prefWidth="120.0">
-                                 <graphic>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" />
-                                 </graphic>
-                              </Button>
-                              <Button fx:id="q3Third" mnemonicParsing="false" onAction="#q3click3" prefHeight="70.0" prefWidth="120.0">
+                              <Button fx:id="q3Second" mnemonicParsing="false" onAction="#q3click2" prefHeight="55.0" prefWidth="100.0" />
+                              <Button fx:id="q3Third" mnemonicParsing="false" onAction="#q3click3" prefHeight="55.0" prefWidth="100.0">
                                  <HBox.margin>
                                     <Insets left="25.0" />
                                  </HBox.margin>
-                                 <graphic>
-                                    <VBox prefHeight="70.0" prefWidth="120.0">
-                                       <padding>
-                                          <Insets left="15.0" />
-                                       </padding></VBox>
-                                 </graphic>
                               </Button>
                            </children>
                         </HBox>

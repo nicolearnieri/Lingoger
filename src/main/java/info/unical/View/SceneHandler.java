@@ -151,6 +151,7 @@ public class SceneHandler
         logInOrSignUpStage.setScene(logInScene);
         logInOrSignUpStage.setResizable(false);
         logInOrSignUpStage.show();
+        controller.init();
     }
 
 
