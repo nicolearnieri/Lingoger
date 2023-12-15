@@ -20,7 +20,7 @@ public class StartController {
     }
 
     @FXML
-    void signUpClicked(ActionEvent event) {
+    void signUpClicked(ActionEvent event) throws Exception {
         SceneHandler.getInstance().setSignUp();
 
     }

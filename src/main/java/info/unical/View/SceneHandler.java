@@ -1,6 +1,7 @@
 package info.unical.View;
 
 import info.unical.Controller.LogInController;
+import info.unical.Controller.SignUpController;
 import info.unical.Controller.StartController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -131,6 +132,29 @@ public class SceneHandler
         logInOrSignUpStage.show();
     }
 
+
+    public void setSignUp() throws Exception
+    {
+        if(logInOrSignUpStage!=null) {logInOrSignUpStage.close();}
+        logInOrSignUpStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "SignUp.fxml"));
+
+        logInScene = new Scene(loader.load(), 600, 500); //v:larghezza, v1:altezza
+
+        logInOrSignUpStage.initModality(Modality.APPLICATION_MODAL); // Imposta la finestra come modale, quindi non permette di interagire con altre finestre
+
+        SignUpController controller= loader.getController();
+
+        //changedTheme(logInScene);
+
+        logInOrSignUpStage.setTitle("Lingoger");
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
+        logInOrSignUpStage.getIcons().add(icon); // Imposta l'icona per la finestra
+
+        logInOrSignUpStage.setScene(logInScene);
+        logInOrSignUpStage.setResizable(false);
+        logInOrSignUpStage.show();
+    }
 
 
 
