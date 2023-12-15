@@ -31,6 +31,8 @@ public class SceneHandler
 
     private String theme = "LingogerTheme";
 
+    private String font = "Font";
+
     private static SceneHandler instance = null;
 
 
@@ -84,7 +86,7 @@ public class SceneHandler
         Objects.requireNonNull(scene);
         scene.getStylesheets().clear();
         scene.getStylesheets().add(getClass().getResource(CSS_PATH + theme + ".css").toExternalForm());
-
+        scene.getStylesheets().add(String.valueOf(getClass().getResource(CSS_PATH + font + ".css")));
 
     }
 
