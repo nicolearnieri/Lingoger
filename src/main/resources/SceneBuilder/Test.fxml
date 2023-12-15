@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="607.0" prefWidth="614.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="info.unical.Controller.TestController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="586.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="40.0" prefWidth="85.0" text="Test 1">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Agency FB Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="450.0" prefWidth="614.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="100.0" prefWidth="615.0">
+                     <children>
+                        <Label fx:id="question1" text="Question 1 :" />
+                        <HBox prefHeight="123.0" prefWidth="614.0">
+                           <children>
+                              <Button fx:id="q1First" mnemonicParsing="false" onAction="#q1click1" text="Button" />
+                            <Button fx:id="q1Second" mnemonicParsing="false" onAction="#q1click2" text="Button" />
+                              <Button fx:id="q1Third" mnemonicParsing="false" onAction="#q1click3" text="Button" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="150.0" prefWidth="617.0">
+                     <children>
+                        <Label fx:id="question2" text="Question 2:" />
+                        <HBox prefHeight="82.0" prefWidth="646.0">
+                           <children>
+                              <Button fx:id="q2First" mnemonicParsing="false" onAction="#q2click1" text="Button" />
+                              <Button fx:id="q2Second" mnemonicParsing="false" onAction="#q2click2" text="Button" />
+                              <Button fx:id="q2Third" mnemonicParsing="false" onAction="#q2click3" text="Button" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="150.0" prefWidth="614.0">
+               <children>
+                  <VBox prefHeight="166.0" prefWidth="614.0">
+                     <children>
+                        <Label fx:id="question3" text="Question 3:" />
+                        <HBox alignment="CENTER" prefHeight="160.0" prefWidth="614.0">
+                           <children>
+                              <Button fx:id="q3First" mnemonicParsing="false" onAction="#q3click1" prefHeight="70.0" prefWidth="120.0">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <VBox prefHeight="45.0" prefWidth="100.0" />
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="q3Second" mnemonicParsing="false" onAction="#q3click2" prefHeight="70.0" prefWidth="120.0">
+                                 <graphic>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" />
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="q3Third" mnemonicParsing="false" onAction="#q3click3" prefHeight="70.0" prefWidth="120.0">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <VBox prefHeight="70.0" prefWidth="120.0" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="confirmationButton" mnemonicParsing="false" onAction="#confirmationClick" prefHeight="45.0" prefWidth="100.0" text="Conferma" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

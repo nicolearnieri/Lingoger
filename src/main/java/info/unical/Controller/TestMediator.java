@@ -41,7 +41,7 @@ public class TestMediator {
         return buttonCounter == 3;
     }
 
-    public void buttonClicked(boolean alreadyClicked, Button button)
+    public void buttonClicked(boolean alreadyClicked, Button confirmationButton)
     {
         if(alreadyClicked)
         {
@@ -54,9 +54,9 @@ public class TestMediator {
 
 
         if (isTestFinished())
-        { button.setDisable(false); }
+        { confirmationButton.setDisable(false); }
         else
-        { button.setDisable(true); }
+        { confirmationButton.setDisable(true); }
     }
 
     public void verifyTest(){}; //da implementare
