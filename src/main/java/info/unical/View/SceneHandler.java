@@ -1,13 +1,17 @@
 package info.unical.View;
 
+import info.unical.Controller.StartController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
 
 public class SceneHandler
 {
@@ -27,8 +31,8 @@ public class SceneHandler
 
     private static SceneHandler instance = null;
 
-    private SceneHandler()
-    {}
+
+    private SceneHandler() {}
 
     public void init(Stage primaryStage) throws Exception { //metodo che puÃ² generare eccezione
         if(stage != null) return;
@@ -38,7 +42,7 @@ public class SceneHandler
         scene = new Scene(loader.load(), 900, 700); //v:larghezza, v1:altezza
         StartController controller= loader.getController();
         changedTheme(scene);
-        stage.setTitle("DeliverBoo");
+        stage.setTitle("Lingoger");
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
         stage.getIcons().add(icon); // Imposta l'icona per la finestra
         stage.setScene(scene);
@@ -46,6 +50,12 @@ public class SceneHandler
 
     }
 
+
+    public static SceneHandler getInstance() {
+        if(instance == null)
+            instance = new SceneHandler();
+        return instance;
+    }
 
     public void closeStage(Stage myStage)
     {
@@ -78,6 +88,45 @@ public class SceneHandler
             loadOpenDyslexic();
         }
     }
+
+
+    public void setStartInterface() throws Exception {
+        if(stage!=null) {stage.close();}
+        stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "Start.fxml"));
+        scene = new Scene(loader.load(), 900, 700); //v:larghezza, v1:altezza
+
+        StartController controller= loader.getController();
+        changedTheme(scene);
+        stage.setTitle("Lingoger");
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
+        stage.getIcons().add(icon); // Imposta l'icona per la finestra
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    public void setLogIn() throws Exception {
+        if(logInOrSignUpStage!=null) {logInOrSignUpStage.close();}
+        logInOrSignUpStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "LogIn.fxml"));
+        logInScene = new Scene(loader.load(), 600, 500); //v:larghezza, v1:altezza
+
+        logInOrSignUpStage.initModality(Modality.APPLICATION_MODAL); // Imposta la finestra come modale, quindi non permette di interagire con altre finestre
+
+        LogInController controller= loader.getController();
+
+        changedTheme(logInScene);
+
+        logInOrSignUpStage.setTitle("Lingoger");
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
+        logInOrSignUpStage.getIcons().add(icon); // Imposta l'icona per la finestra
+
+        logInOrSignUpStage.setScene(logInScene);
+        logInOrSignUpStage.setResizable(false);
+        logInOrSignUpStage.show();
+    }
+
 
 
 
