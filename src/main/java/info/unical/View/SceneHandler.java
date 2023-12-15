@@ -1,5 +1,6 @@
 package info.unical.View;
 
+import info.unical.Controller.LogInController;
 import info.unical.Controller.StartController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +42,7 @@ public class SceneHandler
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "Start.fxml"));
         scene = new Scene(loader.load(), 900, 700); //v:larghezza, v1:altezza
         StartController controller= loader.getController();
-        changedTheme(scene);
+        //changedTheme(scene);
         stage.setTitle("Lingoger");
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
         stage.getIcons().add(icon); // Imposta l'icona per la finestra
@@ -66,6 +67,8 @@ public class SceneHandler
 
     public void showStage(Stage myStage){myStage.show();}
 
+
+    /*
     private void changedTheme(Scene scene) {
         setCSSForScene(scene);
         setCSSForAlert(alertError);
@@ -89,6 +92,7 @@ public class SceneHandler
         }
     }
 
+    */
 
     public void setStartInterface() throws Exception {
         if(stage!=null) {stage.close();}
@@ -97,7 +101,7 @@ public class SceneHandler
         scene = new Scene(loader.load(), 900, 700); //v:larghezza, v1:altezza
 
         StartController controller= loader.getController();
-        changedTheme(scene);
+        //changedTheme(scene);
         stage.setTitle("Lingoger");
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
         stage.getIcons().add(icon); // Imposta l'icona per la finestra
@@ -116,7 +120,7 @@ public class SceneHandler
 
         LogInController controller= loader.getController();
 
-        changedTheme(logInScene);
+        //changedTheme(logInScene);
 
         logInOrSignUpStage.setTitle("Lingoger");
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
