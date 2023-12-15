@@ -1,11 +1,12 @@
-*{
+*
+{
     -fx-font-family: 'Poppins';
 
 }
 
 
 .root {
-    -fx-background-color: #ffcda3;
+    -fx-background-color: #fef3eb;
 }
 
 .button {

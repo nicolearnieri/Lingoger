@@ -41,9 +41,9 @@ public class SceneHandler
 
         stage = primaryStage;
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "Start.fxml"));
-        scene = new Scene(loader.load(), 900, 700); //v:larghezza, v1:altezza
+        scene = new Scene(loader.load(), 550, 400); //v:larghezza, v1:altezza
         StartController controller= loader.getController();
-        //changedTheme(scene);
+        changedTheme(scene);
         stage.setTitle("Lingoger");
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
         stage.getIcons().add(icon); // Imposta l'icona per la finestra
@@ -69,12 +69,12 @@ public class SceneHandler
     public void showStage(Stage myStage){myStage.show();}
 
 
-    /*
+
     private void changedTheme(Scene scene) {
         setCSSForScene(scene);
-        setCSSForAlert(alertError);
+        /*  setCSSForAlert(alertError);
         setCSSForAlert(alertInfo);
-        setCSSForAlert(alertConfirmation);
+        setCSSForAlert(alertConfirmation);*/
     }
 
 
@@ -83,26 +83,21 @@ public class SceneHandler
     private void setCSSForScene(Scene scene) { //in base a theme setta i css per la scena
         Objects.requireNonNull(scene);
         scene.getStylesheets().clear();
-        for(String resource : resources)
-            scene.getStylesheets().add(resource);
+        scene.getStylesheets().add(getClass().getResource(CSS_PATH + theme + ".css").toExternalForm());
 
-        if (font.equals("FontMontserrat")) {
-            loadMontserrat();
-        } else {
-            loadOpenDyslexic();
-        }
+
     }
 
-    */
 
-    public void setStartInterface() throws Exception {
+
+    public void setStart() throws Exception {
         if(stage!=null) {stage.close();}
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "Start.fxml"));
-        scene = new Scene(loader.load(), 900, 700); //v:larghezza, v1:altezza
+        scene = new Scene(loader.load(), 510, 500); //v:larghezza, v1:altezza
 
         StartController controller= loader.getController();
-        //changedTheme(scene);
+        changedTheme(scene);
         stage.setTitle("Lingoger");
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
         stage.getIcons().add(icon); // Imposta l'icona per la finestra
@@ -115,13 +110,13 @@ public class SceneHandler
         if(logInOrSignUpStage!=null) {logInOrSignUpStage.close();}
         logInOrSignUpStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "LogIn.fxml"));
-        logInScene = new Scene(loader.load(), 600, 500); //v:larghezza, v1:altezza
+        logInScene = new Scene(loader.load(), 510, 410); //v:larghezza, v1:altezza
 
         logInOrSignUpStage.initModality(Modality.APPLICATION_MODAL); // Imposta la finestra come modale, quindi non permette di interagire con altre finestre
 
         LogInController controller= loader.getController();
 
-        //changedTheme(logInScene);
+        changedTheme(logInScene);
 
         logInOrSignUpStage.setTitle("Lingoger");
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
@@ -139,13 +134,13 @@ public class SceneHandler
         logInOrSignUpStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "SignUp.fxml"));
 
-        logInScene = new Scene(loader.load(), 600, 500); //v:larghezza, v1:altezza
+        logInScene = new Scene(loader.load(), 510, 540); //v:larghezza, v1:altezza
 
         logInOrSignUpStage.initModality(Modality.APPLICATION_MODAL); // Imposta la finestra come modale, quindi non permette di interagire con altre finestre
 
         SignUpController controller= loader.getController();
 
-        //changedTheme(logInScene);
+        changedTheme(logInScene);
 
         logInOrSignUpStage.setTitle("Lingoger");
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
