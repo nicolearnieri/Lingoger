@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="info.unical.Controller.LogInController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="137.0" prefWidth="480.0" BorderPane.alignment="CENTER">
          <children>
@@ -38,7 +37,7 @@
             <HBox alignment="CENTER" prefHeight="86.0" prefWidth="480.0">
                <children>
                   <Label alignment="CENTER" prefHeight="35.0" prefWidth="130.0" text="Nome utente/e-mail" />
-                  <TextField prefHeight="27.0" prefWidth="160.0" />
+                  <TextField fx:id="usernameOrEmailField" prefHeight="27.0" prefWidth="160.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="87.0" prefWidth="480.0">
@@ -46,20 +45,20 @@
                   <Label alignment="CENTER" prefHeight="35.0" prefWidth="130.0" text="Password" textAlignment="CENTER" />
                   <StackPane prefHeight="27.0" prefWidth="160.0">
                      <children>
-                        <TextField prefHeight="27.0" prefWidth="160.0" />
+                        <TextField fx:id="passwordField" prefHeight="27.0" prefWidth="160.0" />
                      </children>
                   </StackPane>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="82.0" prefWidth="480.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Accedi" />
+                  <Button fx:id="logButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Accedi" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Non hai un profilo?" />
-                  <Label text="Registrati" underline="true">
+                  <Label fx:id="registrationCLabel" text="Registrati" underline="true">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

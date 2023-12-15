@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="513.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="513.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="info.unical.Controller.SignUpController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -39,7 +39,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label alignment="CENTER" prefHeight="35.0" prefWidth="130.0" text="Nome Utente" textAlignment="CENTER" />
-                  <TextField prefHeight="27.0" prefWidth="160.0" />
+                  <TextField fx:id="usernameLabel" prefHeight="27.0" prefWidth="160.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -49,7 +49,7 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <TextField prefHeight="27.0" prefWidth="160.0" />
+                  <TextField fx:id="emailLabel" prefHeight="27.0" prefWidth="160.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -61,8 +61,8 @@
                   </Label>
                   <StackPane prefHeight="150.0" prefWidth="160.0">
                      <children>
-                        <TextField />
-                        <PasswordField prefHeight="27.0" prefWidth="160.0" />
+                        <TextField fx:id="seePField" />
+                        <PasswordField fx:id="passwordField" prefHeight="27.0" prefWidth="160.0" />
                      </children>
                   </StackPane>
                </children>
@@ -76,8 +76,8 @@
                   </Label>
                   <StackPane prefHeight="150.0" prefWidth="160.0">
                      <children>
-                        <TextField />
-                        <PasswordField prefHeight="27.0" prefWidth="160.0" />
+                        <TextField fx:id="confirmPVisible" />
+                        <PasswordField fx:id="confirmPasswordField" prefHeight="27.0" prefWidth="160.0" />
                      </children>
                   </StackPane>
                </children>
@@ -85,12 +85,12 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label alignment="CENTER" prefHeight="35.0" prefWidth="130.0" text="Lingua" />
-                  <ChoiceBox prefHeight="27.0" prefWidth="160.0" />
+                  <ChoiceBox fx:id="languageChooser" prefHeight="27.0" prefWidth="160.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="130.0" prefWidth="514.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Registrati" />
+                  <Button fx:id="registrationButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Registrati" />
                </children>
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -100,7 +100,7 @@
                         <Insets bottom="10.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Accedi" underline="true">
+                  <Label fx:id="signUpClickableLabel" text="Accedi" underline="true">
                      <HBox.margin>
                         <Insets bottom="10.0" />
                      </HBox.margin>
