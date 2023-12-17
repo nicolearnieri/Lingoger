@@ -34,7 +34,7 @@ public class SignUpController {
     @FXML
     private TextField usernameLabel;
 
-    static ObservableList<String> languageList = FXCollections.observableArrayList("Inglese","Francese");
+    static ObservableList<String> languageList = FXCollections.observableArrayList("Inglese","Francese", "Spagnolo", "Portoghese");
 
 
    public void init()

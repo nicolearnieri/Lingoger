@@ -5,7 +5,7 @@ public class User
     private static User instance;
     private String nomeUtente;
     private String email;
-    private String language="inglese";
+    private String language;
 
     private boolean access = false;
 
@@ -26,6 +26,12 @@ public class User
     }
 
     public void setAccess(boolean value) {this.access = value;}
+
+    public String getLanguage() {return language;}
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 
     public static User getInstance() {
         if (instance == null)
