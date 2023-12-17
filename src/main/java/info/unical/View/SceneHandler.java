@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -74,9 +75,9 @@ public class SceneHandler
 
     private void changedTheme(Scene scene) {
         setCSSForScene(scene);
-        /*  setCSSForAlert(alertError);
+        setCSSForAlert(alertError);
         setCSSForAlert(alertInfo);
-        setCSSForAlert(alertConfirmation);*/
+        setCSSForAlert(alertConfirmation);
     }
 
 
@@ -90,7 +91,11 @@ public class SceneHandler
 
     }
 
-
+    private void setCSSForAlert(Alert alert) {
+        Objects.requireNonNull(alert, "Alert cannot be null");
+        alert.getDialogPane().getStylesheets().clear();
+        alert.getDialogPane().getStylesheets().add(getClass().getResource(CSS_PATH + theme + ".css").toExternalForm());
+    }
 
     public void setStart() throws Exception {
         if(stage!=null) {stage.close();}
@@ -152,6 +157,48 @@ public class SceneHandler
         logInOrSignUpStage.setResizable(false);
         logInOrSignUpStage.show();
         controller.init();
+    }
+
+
+    public void showError(String message, String title) {
+        alertError.setTitle(title);
+        alertError.setHeaderText("");
+        alertError.setContentText(message);
+        alertError.getDialogPane().setPrefWidth(500);
+        alertError.showAndWait();
+
+
+    }
+
+    public void showInfo(String message, String title) {
+        /*FontIcon icon = new FontIcon("mdi2i-information-outline");
+        icon.getStyleClass().add("icons-color"); //da aggiungere nei css
+        icon.setIconSize(40); */
+        //alertInfo.setGraphic(icon);
+        alertInfo.setTitle(title);
+        alertInfo.setHeaderText("");
+        alertInfo.setContentText(message);
+        alertInfo.getDialogPane().setPrefWidth(500);
+        alertInfo.show();
+    }
+    public boolean showConfirmation(String message, String title) {
+       /* FontIcon icon = new FontIcon("mdi2h-home-map-marker");
+        icon.getStyleClass().add("icons-color");
+        icon.setIconSize(40);*/
+        //alertConfirmation.setGraphic(icon);
+        alertConfirmation.setTitle(title);
+        alertConfirmation.setHeaderText("");
+        alertConfirmation.setContentText(message);
+        alertConfirmation.getDialogPane().setPrefWidth(600);
+
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+
+        alertConfirmation.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        ButtonType response = alertConfirmation.showAndWait().orElse(buttonTypeYes); //default se l'utente non preme ne su SI ne su NO
+
+        return response == buttonTypeYes;
     }
 
 
