@@ -57,6 +57,9 @@ public class SignUpController {
     @FXML
     private TextField usernameField;
 
+    @FXML
+    private Button accessButton;
+
     static ObservableList<String> languageList = FXCollections.observableArrayList("Inglese","Francese", "Spagnolo", "Portoghese");
 
     Image openEye = new Image(Objects.requireNonNull(getClass().getResource("/images/open_eye.png")).toExternalForm());

@@ -132,6 +132,7 @@ public class SceneHandler
         logInOrSignUpStage.setScene(logInScene);
         logInOrSignUpStage.setResizable(false);
         logInOrSignUpStage.show();
+        controller.init();
     }
 
 
@@ -171,10 +172,6 @@ public class SceneHandler
     }
 
     public void showInfo(String message, String title) {
-        /*FontIcon icon = new FontIcon("mdi2i-information-outline");
-        icon.getStyleClass().add("icons-color"); //da aggiungere nei css
-        icon.setIconSize(40); */
-        //alertInfo.setGraphic(icon);
         alertInfo.setTitle(title);
         alertInfo.setHeaderText("");
         alertInfo.setContentText(message);
@@ -182,10 +179,6 @@ public class SceneHandler
         alertInfo.show();
     }
     public boolean showConfirmation(String message, String title) {
-       /* FontIcon icon = new FontIcon("mdi2h-home-map-marker");
-        icon.getStyleClass().add("icons-color");
-        icon.setIconSize(40);*/
-        //alertConfirmation.setGraphic(icon);
         alertConfirmation.setTitle(title);
         alertConfirmation.setHeaderText("");
         alertConfirmation.setContentText(message);
@@ -199,6 +192,11 @@ public class SceneHandler
         ButtonType response = alertConfirmation.showAndWait().orElse(buttonTypeYes); //default se l'utente non preme ne su SI ne su NO
 
         return response == buttonTypeYes;
+    }
+
+    public Stage returnLogInSignUpStage()
+    {
+        return logInOrSignUpStage;
     }
 
 

@@ -162,7 +162,7 @@ class GetEmailCallable implements Callable<String>  {
 
     @Override
     public String call() throws Exception {
-        String query = "SELECT email FROM user WHERE nomeUtente = ?";
+        String query = "SELECT email FROM user WHERE username = ?";
         try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setString(1, username);

@@ -91,7 +91,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label alignment="CENTER" prefHeight="35.0" prefWidth="130.0" text="Lingua" />
-                  <ComboBox fx:id="languageChooser" prefWidth="150.0" />
+                  <ComboBox fx:id="languageChooser" prefWidth="150.0" promptText="Scegli una lingua:" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="130.0" prefWidth="514.0">
@@ -99,18 +99,18 @@
                   <Button fx:id="registrationButton" mnemonicParsing="false" onAction="#registration" prefHeight="35.0" prefWidth="100.0" text="Registrati" />
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="BOTTOM_CENTER" prefHeight="114.0" prefWidth="510.0">
                <children>
                   <Label text="Sei già registrato?">
                      <HBox.margin>
                         <Insets bottom="10.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="signUpClickableLabel" onMouseClicked="#openLogIn" text="Accedi" underline="true">
+                  <Button fx:id="accessButton" mnemonicParsing="false" onAction="#openLogIn" text="Accedi">
                      <HBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="7.0" />
                      </HBox.margin>
-                  </Label>
+                  </Button>
                </children>
             </HBox>
          </children>
