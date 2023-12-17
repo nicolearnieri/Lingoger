@@ -50,7 +50,7 @@
                         <PasswordField fx:id="passwordHiddenField" />
                      </children>
                   </StackPane>
-                  <ImageView fx:id="image" fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image" fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="82.0" prefWidth="480.0">
