@@ -8,6 +8,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
@@ -35,6 +36,9 @@ public class TestChoiceMenu {
     @FXML
     private MenuItem spanishItem;
 
+    @FXML
+    private VBox centerVbox;
+
     private ExecutorService executor = ExecutorProvider.getExecutor();
 
     User user = User.getInstance();
@@ -45,38 +49,21 @@ public class TestChoiceMenu {
     Image pt = new Image(Objects.requireNonNull(getClass().getResource("/images/portuguese-flag.png")).toExternalForm());
 
 
-    public void init() {
+    public void init()
+    {
         choosenLanguageLabel.setText(user.getLanguage());
         if (user.getLanguage().equals("Inglese")) englishImage();
         else if (user.getLanguage().equals("Francese")) frenchImage();
         else if (user.getLanguage().equals("Spagnolo")) spanishImage();
         else if (user.getLanguage().equals("Portoghese")) portugueseImage();
-
     }
 
-    void englishImage()
-    {
+    void englishImage()  { choosenLanguageImage.setImage(eng); }
 
-        choosenLanguageImage.setImage(eng);
-    }
+    void frenchImage()  { choosenLanguageImage.setImage(fr); }
 
-    void frenchImage()
-    {
+    void spanishImage() { choosenLanguageImage.setImage(sp); }
 
-        choosenLanguageImage.setImage(fr);
-    }
-
-    void spanishImage()
-    {
-
-        choosenLanguageImage.setImage(sp);
-    }
-
-    void portugueseImage()
-    {
-
-        choosenLanguageImage.setImage(pt);
-    }
+    void portugueseImage()  { choosenLanguageImage.setImage(pt); }
 }
 
-}
