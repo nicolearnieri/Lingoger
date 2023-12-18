@@ -1,7 +1,9 @@
 package info.unical.Controller;
 
 import info.unical.Model.ExecutorProvider;
+import info.unical.Model.QueryCreator;
 import info.unical.Model.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -11,7 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.util.Objects;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 public class TestChoiceMenu {
 
@@ -65,5 +69,65 @@ public class TestChoiceMenu {
     void spanishImage() { choosenLanguageImage.setImage(sp); }
 
     void portugueseImage()  { choosenLanguageImage.setImage(pt); }
+
+
+
+    void settingTests()
+    {
+        //eseguiamo la query porca pucela
+    }
+
+    @FXML
+    void englishLanguage(ActionEvent event)
+    {
+        if (user.getLanguage() != "Inglese")
+        {
+            Callable<Boolean> updateTask = QueryCreator.createUpdateOnUser(user.getNomeUtente(), "Inglese");
+            Future<Boolean> future = executor.submit(updateTask);
+            user.setLanguage("Inglese");
+            choosenLanguageLabel.setText(user.getLanguage());
+            englishImage();
+
+        }
+    }
+
+    @FXML
+    void frenchLanguage(ActionEvent event) {
+        if (user.getLanguage() != "Francese")
+        {
+            Callable<Boolean> updateTask = QueryCreator.createUpdateOnUser(user.getNomeUtente(), "Francese");
+            Future<Boolean> future = executor.submit(updateTask);
+            user.setLanguage("Francese");
+            choosenLanguageLabel.setText(user.getLanguage());
+            frenchImage();
+        }
+    }
+
+    @FXML
+    void portugueseLanguage(ActionEvent event) {
+        if (user.getLanguage() != "Portoghese")
+        {
+            Callable<Boolean> updateTask = QueryCreator.createUpdateOnUser(user.getNomeUtente(), "Portoghese");
+            Future<Boolean> future = executor.submit(updateTask);
+            user.setLanguage("Portoghese");
+            choosenLanguageLabel.setText(user.getLanguage());
+            portugueseImage();
+        }
+
+    }
+
+    @FXML
+    void spanishLanguage(ActionEvent event) {
+        if (user.getLanguage() != "Spagnolo")
+        {
+            Callable<Boolean> updateTask = QueryCreator.createUpdateOnUser(user.getNomeUtente(), "Spagnolo");
+            Future<Boolean> future = executor.submit(updateTask);
+            user.setLanguage("Spagnolo");
+            choosenLanguageLabel.setText(user.getLanguage());
+            spanishImage();
+        }
+
+    }
+
 }
 

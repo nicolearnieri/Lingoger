@@ -46,10 +46,10 @@
                      </HBox.margin></ImageView>
                   <MenuButton fx:id="LanguageMenu" mnemonicParsing="false" prefHeight="32.0" prefWidth="119.0" text="Cambia Lingua">
                     <items>
-                        <MenuItem fx:id="englishItem" mnemonicParsing="false" text="Inglese" />
-                      <MenuItem fx:id="frenchItem" mnemonicParsing="false" text="Francese" />
-                      <MenuItem fx:id="spanishItem" mnemonicParsing="false" text="Spagnolo" />
-                        <MenuItem fx:id="portugueseItem" mnemonicParsing="false" text="Portoghese" />
+                        <MenuItem fx:id="englishItem" mnemonicParsing="false" onAction="#englishLanguage" text="Inglese" />
+                      <MenuItem fx:id="frenchItem" mnemonicParsing="false" onAction="#frenchLanguage" text="Francese" />
+                      <MenuItem fx:id="spanishItem" mnemonicParsing="false" onAction="#spanishLanguage" text="Spagnolo" />
+                        <MenuItem fx:id="portugueseItem" mnemonicParsing="false" onAction="#portugueseLanguage" text="Portoghese" />
                     </items>
                      <HBox.margin>
                         <Insets right="15.0" />
