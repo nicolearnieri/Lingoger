@@ -89,7 +89,7 @@ public class LogInController {
     }
 
     @FXML
-    public void logInUser () throws ExecutionException, InterruptedException {
+    public void logInUser () throws Exception {
         String user = usernameOrEmailField.getText();
         String password = passwordField.getText();
         boolean email = ValidatorUtility.isValidEmail(user);
@@ -146,12 +146,14 @@ public class LogInController {
                 logSuccess();
                 SceneHandler.getInstance().closeStage(SceneHandler.getInstance().returnLogInSignUpStage());
 
+
                 Callable<Vector<String>> info = QueryCreator.returnUserInfoCallable(user);
                 Future<Vector<String>> exec = executor.submit(info);
                 Vector<String> res = exec.get();
                 if (res.size() ==1) {
                     cU.setLanguage(res.get(0));
                 }
+                SceneHandler.getInstance().setTestChoiceMenu();
             }
             else logInError("La password da te inserita potrebbe\nessere errata.");
         }

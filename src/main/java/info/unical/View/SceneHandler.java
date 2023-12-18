@@ -3,6 +3,7 @@ package info.unical.View;
 import info.unical.Controller.LogInController;
 import info.unical.Controller.SignUpController;
 import info.unical.Controller.StartController;
+import info.unical.Controller.TestChoiceMenu;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -200,5 +201,22 @@ public class SceneHandler
     }
 
 
+    public void setTestChoiceMenu() throws Exception {
+        if(stage!=null) {stage.close();}
+        stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "TestChoiceMenu.fxml"));
+        scene = new Scene(loader.load(), 510, 500); //v:larghezza, v1:altezza
 
+        TestChoiceMenu controller = loader.getController();
+        changedTheme(scene);
+
+        stage.setTitle("Lingoger");
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
+        stage.getIcons().add(icon); // Imposta l'icona per la finestra
+
+        stage.setScene(scene);
+        stage.show();
+        controller.init();
+
+    }
 }
