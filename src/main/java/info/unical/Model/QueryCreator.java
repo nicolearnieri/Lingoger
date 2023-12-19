@@ -56,6 +56,30 @@ import java.util.concurrent.Callable;
             return callable;
         }
 
+        public static Callable<Integer> createRetrieveTestsEnglishCallable()
+        {
+            RetrieveTestsEnglishCallable callable = new RetrieveTestsEnglishCallable();
+            return callable;
+        }
+
+        public static Callable<Integer> createRetrieveTestsFrenchCallable()
+        {
+            RetrieveTestsFrenchCallable callable = new RetrieveTestsFrenchCallable();
+            return callable;
+        }
+
+        public static Callable<Integer> createRetrieveTestsSpanishCallable()
+        {
+            RetrieveTestsSpanishCallable callable = new RetrieveTestsSpanishCallable();
+            return callable;
+        }
+
+        public static Callable<Integer> createRetrieveTestsPortugueseCallable()
+        {
+            RetrieveTestsPortugueseCallable callable = new RetrieveTestsPortugueseCallable();
+            return callable;
+        }
+
     }
 
 

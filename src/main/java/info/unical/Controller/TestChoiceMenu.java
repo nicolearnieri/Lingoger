@@ -5,6 +5,7 @@ import info.unical.Model.QueryCreator;
 import info.unical.Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -14,6 +15,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.Objects;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
@@ -62,20 +64,64 @@ public class TestChoiceMenu {
         else if (user.getLanguage().equals("Portoghese")) portugueseImage();
     }
 
-    void englishImage()  { choosenLanguageImage.setImage(eng); }
+    void englishImage()
+    { choosenLanguageImage.setImage(eng); }
 
-    void frenchImage()  { choosenLanguageImage.setImage(fr); }
+    void frenchImage()
+    { choosenLanguageImage.setImage(fr); }
 
-    void spanishImage() { choosenLanguageImage.setImage(sp); }
+    void spanishImage()
+    { choosenLanguageImage.setImage(sp); }
 
-    void portugueseImage()  { choosenLanguageImage.setImage(pt); }
+    void portugueseImage()
+    { choosenLanguageImage.setImage(pt); }
 
 
 
-    void settingTests()
-    {
-        //eseguiamo la query porca pucela
+    void settingTests() throws ExecutionException, InterruptedException {
+        Callable<Integer> callable = null;
+        if (user.getLanguage()== "Inglese")
+        {
+           callable = QueryCreator.createRetrieveTestsEnglishCallable();
+        }
+        else if (user.getLanguage()== "Francese")
+        {
+            callable = QueryCreator.createRetrieveTestsFrenchCallable();
+        }
+        else if (user.getLanguage()== "Spagnolo")
+        {
+             callable = QueryCreator.createRetrieveTestsSpanishCallable();
+        }
+        else if (user.getLanguage()== "Portoghese")
+        {
+           callable = QueryCreator.createRetrieveTestsPortugueseCallable();
+        }
+
+        Future<Integer> res = executor.submit(callable);
+        int result = res.get();
+
+        if (result != -1)
+        {
+            for (int i= 1; i<= result; i++ )
+            {
+                Button button = new Button("Test " + (i));
+
+               /* button.setOnMouseClicked(event -> {
+                    try {
+
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+                centerVbox.getChildren().add(button);
+                */
+            }
+        }
+
     }
+
 
     @FXML
     void englishLanguage(ActionEvent event)

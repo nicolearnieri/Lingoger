@@ -50,10 +50,13 @@ public class TestController {
 
     public void initialize() {
         mediator.setButtons(q1a1, q1a2, q1a3, q2a1, q2a2, q2a3, q3a1, q3a2, q3a3, confirmationButton);
-        confirmationButton.setDisable(true); //il bottone di conferma è disabilitato finchè non si risponde a tutte le domande, il resto lo gestisce il mediatore
+        //confirmationButton.setDisable(true); //il bottone di conferma è disabilitato finchè non si risponde a tutte le domande, il resto lo gestisce il mediatore
     }
 
+    public void init(int i)
+    {
 
+    }
     @FXML //click generico sui button
     void buttonClick(ActionEvent event) {
 

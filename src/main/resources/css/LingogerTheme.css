@@ -10,3 +10,8 @@
 
 }
 
+.text-field
+{
+    -fx-background-color: #ffdcc9;
+    -fx-text-fill: #602a01;
+}
