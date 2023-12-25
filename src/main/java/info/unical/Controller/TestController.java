@@ -1,5 +1,6 @@
 package info.unical.Controller;
 
+import info.unical.Model.ExecutorProvider;
 import info.unical.Model.QueryCreator;
 import info.unical.Model.User;
 import javafx.event.ActionEvent;
@@ -9,6 +10,9 @@ import javafx.scene.control.Label;
 
 import java.util.Vector;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 public class TestController {
 
@@ -52,6 +56,7 @@ public class TestController {
     private Label question3;
 
     private TestMediator mediator = TestMediator.getInstance();
+    private ExecutorService executor = ExecutorProvider.getExecutor();
     private User user = User.getInstance();
     private static TestController instance = null;
 
@@ -61,38 +66,55 @@ public class TestController {
     	return instance;
     }
 
-    public void initialize(int i, String language) {
+    public void initialize(int i, String language) throws ExecutionException, InterruptedException {
         mediator.setButtons(q1a1, q1a2, q1a3, q2a1, q2a2, q2a3, q3a1, q3a2, q3a3, confirmationButton);
-        //confirmationButton.setDisable(true); //il bottone di conferma è disabilitato finchè non si risponde a tutte le domande, il resto lo gestisce il mediatore
         setTest(i, language);
     }
 
-    public void setTest(int i,String language)
-    {
+    public void setTest(int i,String language) throws ExecutionException, InterruptedException {
         //in base a language chiami la query giusta con i come parametro
         //in base a i setta il test corretto
         Callable<Vector<Object>> callableForQ = null;  //la query che recupera le domande per il test
         Callable<Vector<String>> callableForA = null;  //la query che recupera le risposte per ogni domanda del test
-        if (user.getLanguage()== "Inglese")
+        if (user.getLanguage().equals( "Inglese"))
         {
             callableForQ = QueryCreator.createRetrieveQuestionsEnglishCallable(i);
             callableForA = QueryCreator.createRetrieveAnswersEnglishCallable(i);
         }
-        else if (user.getLanguage()== "Francese")
+        else if (user.getLanguage().equals("Francese"))
         {
             callableForQ = QueryCreator.createRetrieveQuestionsFrenchCallable(i);
             callableForA = QueryCreator.createRetrieveAnswersFrenchCallable(i);
         }
-        else if (user.getLanguage()== "Spagnolo")
+        else if (user.getLanguage().equals("Spagnolo"))
         {
             callableForQ = QueryCreator.createRetrieveQuestionsSpanishCallable(i);
             callableForA = QueryCreator.createRetrieveAnswersSpanishCallable(i);
         }
-        else if (user.getLanguage()== "Portoghese")
+        else if (user.getLanguage().equals("Portoghese"))
         {
             callableForQ = QueryCreator.createRetrieveQuestionsPortugueseCallable(i);
             callableForA = QueryCreator.createRetrieveAnswersPortugueseCallable(i);
         }
+
+        Vector<String> answers = new Vector<>();
+
+        executor.submit(callableForQ);
+        Future<Vector<Object>> resQ = executor.submit(callableForQ);
+        Vector<Object> resultQ = resQ.get();
+        System.out.println(resultQ.size());
+
+        question1.setText((String) resultQ.get(0));
+        answers.add((String) resultQ.get(2));
+        question2.setText((String) resultQ.get(3));
+        answers.add((String) resultQ.get(5));
+        question3.setText((String) resultQ.get(6));
+        answers.add((String) resultQ.get(8));
+
+        executor.submit(callableForA);
+        Future<Vector<String>> resA = executor.submit(callableForA);
+        Vector<String> resultA = resA.get();
+        mediator.setButtonsValues(resultA);
 
     }
     @FXML //click generico sui button
