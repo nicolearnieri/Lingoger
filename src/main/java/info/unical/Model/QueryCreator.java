@@ -1,6 +1,5 @@
 package info.unical.Model;
 
-import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.Callable;
 
@@ -77,6 +76,54 @@ import java.util.concurrent.Callable;
         public static Callable<Integer> createRetrieveTestsPortugueseCallable()
         {
             RetrieveTestsPortugueseCallable callable = new RetrieveTestsPortugueseCallable();
+            return callable;
+        }
+
+        public static Callable<Vector<Object>> createRetrieveQuestionsEnglishCallable(int i)
+        {
+            GetTestQuestionsEngCallable callable = new GetTestQuestionsEngCallable(i);
+            return callable;
+        }
+
+        public static Callable<Vector<Object>> createRetrieveQuestionsFrenchCallable(int i)
+        {
+            GetTestQuestionsFrenchCallable callable = new GetTestQuestionsFrenchCallable(i);
+            return callable;
+        }
+
+        public static Callable<Vector<Object>> createRetrieveQuestionsSpanishCallable(int i)
+        {
+            GetTestQuestionsSpanishCallable callable = new GetTestQuestionsSpanishCallable(i);
+            return callable;
+        }
+
+        public static Callable<Vector<Object>> createRetrieveQuestionsPortugueseCallable(int i)
+        {
+            GetTestQuestionsPortugueseCallable callable = new GetTestQuestionsPortugueseCallable(i);
+            return callable;
+        }
+
+        public static Callable<Vector<String>> createRetrieveAnswersEnglishCallable(int i)
+        {
+            GetAnswersTestEngCallable callable = new GetAnswersTestEngCallable(i);
+            return callable;
+        }
+
+        public static Callable<Vector<String>> createRetrieveAnswersFrenchCallable(int i)
+        {
+            GetAnswersTestFrenchCallable callable = new GetAnswersTestFrenchCallable(i);
+            return callable;
+        }
+
+        public static Callable<Vector<String>> createRetrieveAnswersSpanishCallable(int i)
+        {
+            GetAnswersTestSpanishCallable callable = new GetAnswersTestSpanishCallable(i);
+            return callable;
+        }
+
+        public static Callable<Vector<String>> createRetrieveAnswersPortugueseCallable(int i)
+        {
+            GetAnswersTestPortCallable callable = new GetAnswersTestPortCallable(i);
             return callable;
         }
 

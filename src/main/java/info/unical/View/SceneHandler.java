@@ -1,9 +1,6 @@
 package info.unical.View;
 
-import info.unical.Controller.LogInController;
-import info.unical.Controller.SignUpController;
-import info.unical.Controller.StartController;
-import info.unical.Controller.TestChoiceMenu;
+import info.unical.Controller.*;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
@@ -218,5 +216,23 @@ public class SceneHandler
         stage.show();
         controller.init();
 
+    }
+
+    public void setTestMenu(int i, String l) throws IOException {
+        if(stage!=null) {stage.close();}
+        stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "Test.fxml"));
+        scene = new Scene(loader.load(), 510, 500); //v:larghezza, v1:altezza
+
+        TestController controller = loader.getController();
+        changedTheme(scene);
+
+        stage.setTitle("Lingoger");
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
+        stage.getIcons().add(icon); // Imposta l'icona per la finestra
+
+        stage.setScene(scene);
+        stage.show();
+        controller.initialize(i, l);
     }
 }

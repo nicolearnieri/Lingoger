@@ -1,9 +1,14 @@
 package info.unical.Controller;
 
+import info.unical.Model.QueryCreator;
+import info.unical.Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
+import java.util.Vector;
+import java.util.concurrent.Callable;
 
 public class TestController {
 
@@ -47,24 +52,58 @@ public class TestController {
     private Label question3;
 
     private TestMediator mediator = TestMediator.getInstance();
+    private User user = User.getInstance();
+    private static TestController instance = null;
 
-    public void initialize() {
-        mediator.setButtons(q1a1, q1a2, q1a3, q2a1, q2a2, q2a3, q3a1, q3a2, q3a3, confirmationButton);
-        //confirmationButton.setDisable(true); //il bottone di conferma è disabilitato finchè non si risponde a tutte le domande, il resto lo gestisce il mediatore
+    public static TestController getInstance() {
+    	if(instance == null)
+    		instance = new TestController();
+    	return instance;
     }
 
-    public void init(int i)
+    public void initialize(int i, String language) {
+        mediator.setButtons(q1a1, q1a2, q1a3, q2a1, q2a2, q2a3, q3a1, q3a2, q3a3, confirmationButton);
+        //confirmationButton.setDisable(true); //il bottone di conferma è disabilitato finchè non si risponde a tutte le domande, il resto lo gestisce il mediatore
+        setTest(i, language);
+    }
+
+    public void setTest(int i,String language)
     {
+        //in base a language chiami la query giusta con i come parametro
+        //in base a i setta il test corretto
+        Callable<Vector<Object>> callableForQ = null;  //la query che recupera le domande per il test
+        Callable<Vector<String>> callableForA = null;  //la query che recupera le risposte per ogni domanda del test
+        if (user.getLanguage()== "Inglese")
+        {
+            callableForQ = QueryCreator.createRetrieveQuestionsEnglishCallable(i);
+            callableForA = QueryCreator.createRetrieveAnswersEnglishCallable(i);
+        }
+        else if (user.getLanguage()== "Francese")
+        {
+            callableForQ = QueryCreator.createRetrieveQuestionsFrenchCallable(i);
+            callableForA = QueryCreator.createRetrieveAnswersFrenchCallable(i);
+        }
+        else if (user.getLanguage()== "Spagnolo")
+        {
+            callableForQ = QueryCreator.createRetrieveQuestionsSpanishCallable(i);
+            callableForA = QueryCreator.createRetrieveAnswersSpanishCallable(i);
+        }
+        else if (user.getLanguage()== "Portoghese")
+        {
+            callableForQ = QueryCreator.createRetrieveQuestionsPortugueseCallable(i);
+            callableForA = QueryCreator.createRetrieveAnswersPortugueseCallable(i);
+        }
 
     }
     @FXML //click generico sui button
-    void buttonClick(ActionEvent event) {
-
+    void buttonClick(ActionEvent event)
+    {
+        mediator.newClick(event);
     }
 
     @FXML  //cosa succede se il button di conferma, abilitato dal mediatore, viene cliccato
     void confirmationClick(ActionEvent event) {
-
+        //da implementare il controllo test
 
     }
 

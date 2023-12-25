@@ -1,8 +1,10 @@
 package info.unical.Controller;
 
+import com.sun.javafx.scene.SceneEventDispatcher;
 import info.unical.Model.ExecutorProvider;
 import info.unical.Model.QueryCreator;
 import info.unical.Model.User;
+import info.unical.View.SceneHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -48,6 +51,7 @@ public class TestChoiceMenu {
     private ExecutorService executor = ExecutorProvider.getExecutor();
 
     User user = User.getInstance();
+    TestController testController = TestController.getInstance();
 
     Image fr = new Image(Objects.requireNonNull(getClass().getResource("/images/french-flag.png")).toExternalForm());
     Image eng = new Image(Objects.requireNonNull(getClass().getResource("/images/english-flag.png")).toExternalForm());
@@ -55,13 +59,13 @@ public class TestChoiceMenu {
     Image pt = new Image(Objects.requireNonNull(getClass().getResource("/images/portuguese-flag.png")).toExternalForm());
 
 
-    public void init()
-    {
+    public void init() throws ExecutionException, InterruptedException {
         choosenLanguageLabel.setText(user.getLanguage());
         if (user.getLanguage().equals("Inglese")) englishImage();
         else if (user.getLanguage().equals("Francese")) frenchImage();
         else if (user.getLanguage().equals("Spagnolo")) spanishImage();
         else if (user.getLanguage().equals("Portoghese")) portugueseImage();
+        settingTests();
     }
 
     void englishImage()
@@ -79,26 +83,28 @@ public class TestChoiceMenu {
 
 
     void settingTests() throws ExecutionException, InterruptedException {
-        Callable<Integer> callable = null;
-        if (user.getLanguage()== "Inglese")
+        Callable<Integer> callable = null;  //la query che recupera il numero di test in base alla lingua dell'utente
+
+        if (user.getLanguage().equals( "Inglese"))
         {
            callable = QueryCreator.createRetrieveTestsEnglishCallable();
         }
-        else if (user.getLanguage()== "Francese")
+        else if (user.getLanguage().equals( "Francese"))
         {
             callable = QueryCreator.createRetrieveTestsFrenchCallable();
         }
-        else if (user.getLanguage()== "Spagnolo")
+        else if (user.getLanguage().equals("Spagnolo"))
         {
              callable = QueryCreator.createRetrieveTestsSpanishCallable();
         }
-        else if (user.getLanguage()== "Portoghese")
+        else if (user.getLanguage().equals("Portoghese"))
         {
            callable = QueryCreator.createRetrieveTestsPortugueseCallable();
         }
 
         Future<Integer> res = executor.submit(callable);
         int result = res.get();
+        System.out.println(result);
 
         if (result != -1)
         {
@@ -106,22 +112,26 @@ public class TestChoiceMenu {
             {
                 Button button = new Button("Test " + (i));
 
-               /* button.setOnMouseClicked(event -> {
+                int finalI = i;
+                button.setOnMouseClicked(event -> {
                     try {
+                        generateTest(finalI,user.getLanguage());
 
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
                 });
                 centerVbox.getChildren().add(button);
-                */
+
             }
         }
 
     }
 
+    void generateTest(int i,
+                      String language) throws IOException {
+        SceneHandler.getInstance().setTestMenu(i,language);
+    }
 
     @FXML
     void englishLanguage(ActionEvent event)
@@ -138,7 +148,7 @@ public class TestChoiceMenu {
     }
 
     @FXML
-    void frenchLanguage(ActionEvent event) {
+    void frenchLanguage(ActionEvent event) throws ExecutionException, InterruptedException {
         if (user.getLanguage() != "Francese")
         {
             Callable<Boolean> updateTask = QueryCreator.createUpdateOnUser(user.getNomeUtente(), "Francese");
@@ -147,10 +157,11 @@ public class TestChoiceMenu {
             choosenLanguageLabel.setText(user.getLanguage());
             frenchImage();
         }
+        settingTests();
     }
 
     @FXML
-    void portugueseLanguage(ActionEvent event) {
+    void portugueseLanguage(ActionEvent event) throws ExecutionException, InterruptedException {
         if (user.getLanguage() != "Portoghese")
         {
             Callable<Boolean> updateTask = QueryCreator.createUpdateOnUser(user.getNomeUtente(), "Portoghese");
@@ -159,11 +170,12 @@ public class TestChoiceMenu {
             choosenLanguageLabel.setText(user.getLanguage());
             portugueseImage();
         }
+        settingTests();
 
     }
 
     @FXML
-    void spanishLanguage(ActionEvent event) {
+    void spanishLanguage(ActionEvent event) throws ExecutionException, InterruptedException {
         if (user.getLanguage() != "Spagnolo")
         {
             Callable<Boolean> updateTask = QueryCreator.createUpdateOnUser(user.getNomeUtente(), "Spagnolo");
@@ -172,6 +184,7 @@ public class TestChoiceMenu {
             choosenLanguageLabel.setText(user.getLanguage());
             spanishImage();
         }
+        settingTests();
 
     }
 
