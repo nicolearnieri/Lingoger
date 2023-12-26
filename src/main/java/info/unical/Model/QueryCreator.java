@@ -127,6 +127,31 @@ import java.util.concurrent.Callable;
             return callable;
         }
 
+        public static Callable<Integer> createRetrieveEnglishLessonsCallable()
+        {
+            RetrieveEnglishLessonsCallable callable = new RetrieveEnglishLessonsCallable();
+            return callable;
+        }
+
+        public static Callable<Integer> createRetrieveFrenchLessonsCallable()
+        {
+            RetrieveFrenchLessonsCallable callable = new RetrieveFrenchLessonsCallable();
+            return callable;
+        }
+
+        public static Callable<Integer> createRetrievePortugueseLessonsCallable()
+        {
+            RetrievePortugueseLessonsCallable callable = new RetrievePortugueseLessonsCallable();
+            return callable;
+        }
+
+        public static Callable<Integer> createRetrieveSpanishLessonsCallable()
+        {
+            RetrieveSpanishLessonsCallable callable = new RetrieveSpanishLessonsCallable();
+            return callable;
+        }
+
+
     }
 
 
