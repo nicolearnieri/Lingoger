@@ -236,4 +236,22 @@ public class SceneHandler
         stage.show();
         controller.initialize(i, l);
     }
+
+    public void setResults(int correctAnswers) throws IOException {
+        if(stage!=null) {stage.close();}
+        stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "Results.fxml"));
+        scene = new Scene(loader.load(), 510, 500); //v:larghezza, v1:altezza
+
+        ResultsController controller = loader.getController();
+        changedTheme(scene);
+
+        stage.setTitle("Lingoger");
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
+        stage.getIcons().add(icon); // Imposta l'icona per la finestra
+
+        stage.setScene(scene);
+        stage.show();
+        controller.init(correctAnswers);
+    }
 }

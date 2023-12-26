@@ -111,7 +111,7 @@ public class TestChoiceMenu {
             for (int i= 1; i<= result; i++ )
             {
                 Button button = new Button("Test " + (i));
-
+                button.setStyle("-fx-background-color: #d75c00");
                 int finalI = i;
                 button.setOnMouseClicked(event -> {
                     try {

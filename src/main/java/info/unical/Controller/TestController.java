@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
 import java.util.Vector;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -59,6 +60,7 @@ public class TestController {
     private ExecutorService executor = ExecutorProvider.getExecutor();
     private User user = User.getInstance();
     private static TestController instance = null;
+    Vector<String> answers = new Vector<>();
 
     public static TestController getInstance() {
     	if(instance == null)
@@ -97,7 +99,7 @@ public class TestController {
             callableForA = QueryCreator.createRetrieveAnswersPortugueseCallable(i);
         }
 
-        Vector<String> answers = new Vector<>();
+
 
 
         //executor.submit(callableForQ);
@@ -125,8 +127,8 @@ public class TestController {
     }
 
     @FXML  //cosa succede se il button di conferma, abilitato dal mediatore, viene cliccato
-    void confirmationClick(ActionEvent event) {
-        //da implementare il controllo test
+    void confirmationClick(ActionEvent event) throws IOException {
+        mediator.checkAnswers(answers);
 
     }
 

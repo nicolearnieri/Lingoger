@@ -1,10 +1,12 @@
 package info.unical.Controller;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import info.unical.View.SceneHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,7 +17,8 @@ public class TestMediator {
     private static TestMediator instance = null; //singleton
     private Button b1, b2, b3, b4, b5, b6, b7, b8, b9, confirmationButton; //bottoni delle risposte, il mediatore deve avere un riferimento
 
-    Map<Integer, Integer> map = new HashMap<>(); //mappa per le risposte
+    Map<Integer, Integer> map = new HashMap<>(); //mappa per le risposteù
+    Map<Integer, String> answers  = new HashMap<>(); //mappa per le risposte
     Map<Button, Integer> buttonToNumber = new HashMap<>();
 
 
@@ -45,94 +48,120 @@ public class TestMediator {
     }
 
     public void setButtons(Button b1, Button b2, Button b3, Button b4, Button b5, Button b6, Button b7, Button b8,
-            Button b9, Button ConfirmationButton) {
+            Button b9, Button confirmationButton) {
         this.b1 = b1;
+        b1.setStyle("-fx-background-color: #d75c00");
         this.b2 = b2;
+        b2.setStyle("-fx-background-color: #d75c00");
         this.b3 = b3;
+        b3.setStyle("-fx-background-color: #d75c00");
         this.b4 = b4;
+        b4.setStyle("-fx-background-color: #d75c00");
         this.b5 = b5;
+        b5.setStyle("-fx-background-color: #d75c00");
         this.b6 = b6;
+        b6.setStyle("-fx-background-color: #d75c00");
         this.b7 = b7;
+        b7.setStyle("-fx-background-color: #d75c00");
         this.b8 = b8;
+        b8.setStyle("-fx-background-color: #d75c00");
         this.b9 = b9;
+        b9.setStyle("-fx-background-color: #d75c00");
         this.confirmationButton = confirmationButton;
+        confirmationButton.setStyle("-fx-background-color: #d75c00");
         init();
     }
 
-    public void newClick(ActionEvent event)
-    {
+    public void newClick(ActionEvent event) {
         Button buttonIJustClicked = (Button) event.getSource(); //mi prendo il bottone che ho cliccato dall'evento (il click)
-        int newAnswer = buttonToNumber.get(buttonIJustClicked); //mi prendo il valore associato al bottone che ho cliccato
+        //int newAnswer = buttonToNumber.get(buttonIJustClicked); //mi prendo il valore associato al bottone che ho cliccato
+        String answer = buttonIJustClicked.getText(); //mi prendo il testo del bottone che ho cliccato
 
         int question; // mi setto un valore per capire quale bottone è stato cliccato, in modo da capire a che domanda si sta rispondendo
 
-        if(buttonIJustClicked == b1 || buttonIJustClicked == b2 || buttonIJustClicked == b3)
-        { question = 1; }
-        else if(buttonIJustClicked == b4 || buttonIJustClicked == b5 || buttonIJustClicked == b6)
-        { question = 2; }
-        else
-        { question = 3;}
+        if (buttonIJustClicked == b1 || buttonIJustClicked == b2 || buttonIJustClicked == b3) {
+            question = 1;
+        } else if (buttonIJustClicked == b4 || buttonIJustClicked == b5 || buttonIJustClicked == b6) {
+            question = 2;
+        } else {
+            question = 3;
+        }
 
-        if (map.containsKey(question))
+        if (answers.containsKey(question))
         {
-            //mi prendo il valore associato alla chiave question, quindi la risposta alla domanda
-            int oldValue = map.get(question);
-            if (newAnswer == oldValue) //se il valore associato al bottone che ho cliccato è uguale a quello che avevo già cliccato
+            String oldAnswer = answers.get(question);
+            if (answer.equals(oldAnswer))
             {
-                map.remove(question); //rimuovo la risposta alla domanda
-                buttonIJustClicked.setStyle("-fx-background-color: #d75c00"); //cambio lo stile del bottone in modo da "deselezionarlo"
-                actionOnConfirm(); //controllo se sono state date tutte le risposte
+                answers.remove(question);
+                buttonIJustClicked.setStyle("-fx-background-color: #d75c00");
+                actionOnConfirm();
                 return;
             }
 
-            //mi prendo il bottone associato al valore vecchio e vado a cambiare lo stile in modo da "deselezionarlo"
+            //prendo il bottone associato al valore vecchio e ne cambio lo stile (lo "deseleziono")
+
             switch (question)
             {
                 case 1: //risposta alla domanda 1
-                    if (oldValue == 1) //il button scelto prima era 1
-                    { b1.setStyle("-fx-background-color: #d75c00"); }
-                    else if (oldValue == 2) //il button scelto prima era 2
-                    { b2.setStyle("-fx-background-color: #d75c00"); }
-                    else //il button scelto prima era 3
-                    { b3.setStyle("-fx-background-color: #d75c00"); }
-                    break;
-                case 2:
-                    if (oldValue == 1)
-                    { b4.setStyle("-fx-background-color: #d75c00"); }
-                    else if (oldValue == 2)
-                    { b5.setStyle("-fx-background-color: #d75c00");}
+                    if (oldAnswer.equals(b1.getText()))
+                    {
+                        b1.setStyle("-fx-background-color: #d75c00");
+                    }
+                    else if (oldAnswer.equals(b2.getText()))
+                    {
+                        b2.setStyle("-fx-background-color: #d75c00");
+                    }
                     else
-                    { b6.setStyle("-fx-background-color: #d75c00"); }
+                    {
+                        b3.setStyle("-fx-background-color: #d75c00");
+                    }
+                    break;
+                case 2: //risposta alla domanda 2
+                    if (oldAnswer.equals(b4.getText()))
+                    {
+                        b4.setStyle("-fx-background-color: #d75c00");
+                    }
+                    else if (oldAnswer.equals(b5.getText()))
+                    {
+                        b5.setStyle("-fx-background-color: #d75c00");
+                    }
+                    else
+                    {
+                        b6.setStyle("-fx-background-color: #d75c00");
+                    }
                     break;
                 case 3:
-                    if (oldValue == 1) //il button scelto prima era 1 per la risposta 3
-                    { b7.setStyle("-fx-background-color: #d75c00"); }
-                    else if (oldValue == 2) //il button scelto prima era 2 per la risposta 3
-                    { b8.setStyle("-fx-background-color: #d75c00"); }
-                    else //il button scelto prima era 3 per la risposta 3
-                    { b9.setStyle("-fx-background-color: #d75c00"); }
+                    if (oldAnswer.equals(b7.getText()))
+                    {
+                        b7.setStyle("-fx-background-color: #d75c00");
+                    }
+                    else if (oldAnswer.equals(b8.getText()))
+                    {
+                        b8.setStyle("-fx-background-color: #d75c00");
+                    }
+                    else
+                    {
+                        b9.setStyle("-fx-background-color: #d75c00");
+                    }
                     break;
             }
-
-            map.replace(question, newAnswer); //aggiorno la risposta alla domanda
+            answers.replace(question, answer); //aggiorno la risposta alla domanda
+        }
+        else
+        {
+            answers.put(question, answer); //aggiungo la risposta alla domanda
         }
 
-        else //se non c'è già una risposta alla domanda
-        { map.put(question, newAnswer); //aggiungo la risposta alla domanda
-        }
-
-
-        //cambio lo stile al button appena selezionato
         buttonIJustClicked.setStyle("-fx-background-color: #ffffff"); //è cambiato lol
         buttonIJustClicked.setStyle("-fx-border-color: #d75c00");
+        buttonIJustClicked.setStyle("-fx-border-width: 2px");
         buttonIJustClicked.setStyle("-fx-text-fill: #d75c00");
 
         actionOnConfirm(); //controllo se sono state date tutte le risposte
-
     }
 
     public boolean isReady() {
-        return map.size() == 3; //se la mappa ha 3 elementi, allora sono state date tutte le risposte
+        return answers.size() == 3; //se la mappa ha 3 elementi, allora sono state date tutte le risposte
     }
 
     public void actionOnConfirm()
@@ -144,6 +173,16 @@ public class TestMediator {
         }
         confirmationButton.setDisable(true); //altrimenti lo disabilito
 
+    }
+
+    public void checkAnswers(Vector<String> answersV) throws IOException {
+        int correctAnswers = 0;
+        for (int i = 0; i < answersV.size(); i++)
+        {
+            if (answersV.get(i).equals(answers.get(i+1)))
+            { correctAnswers++; }
+        }
+        SceneHandler.getInstance().setResults(correctAnswers);
     }
 
     public void setButtonsValues(Vector<String> resultA) {

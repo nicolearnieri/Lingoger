@@ -4,13 +4,16 @@
     -fx-background-color: #fef3eb;
 }
 
-.button {
+#logButton, #logInButton, #accessButton, #registrationButton, #signUpButton {
     -fx-background-color: #d75c00;
     -fx-text-fill: #ffdcc9;
 
 }
 
+#logButton, #logInButton, #accessButton, #registrationButton :hover
+{
 
+}
 
 .text-field
 {
