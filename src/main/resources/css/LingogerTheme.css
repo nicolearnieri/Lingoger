@@ -4,7 +4,7 @@
     -fx-background-color: #fef3eb;
 }
 
-#logButton, #logInButton, #accessButton, #registrationButton, #signUpButton {
+#logButton, #logInButton, #accessButton, #registrationButton, #signUpButton, #closeButton {
     -fx-background-color: #d75c00;
     -fx-text-fill: #ffdcc9;
 
