@@ -44,7 +44,7 @@
             <HBox alignment="CENTER" prefHeight="87.0" prefWidth="480.0">
                <children>
                   <Label alignment="CENTER" prefHeight="35.0" prefWidth="130.0" text="Password" textAlignment="CENTER" />
-                  <StackPane prefHeight="27.0" prefWidth="160.0">
+                  <StackPane prefHeight="62.0" prefWidth="129.0">
                      <children>
                         <TextField fx:id="passwordField" prefHeight="27.0" prefWidth="160.0" />
                         <PasswordField fx:id="passwordHiddenField" />

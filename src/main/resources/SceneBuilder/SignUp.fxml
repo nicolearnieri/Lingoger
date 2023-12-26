@@ -59,10 +59,10 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <StackPane prefHeight="150.0" prefWidth="160.0">
+                  <StackPane prefHeight="50.0" prefWidth="128.0">
                      <children>
                         <TextField fx:id="seePField" />
-                        <PasswordField fx:id="passwordField" prefHeight="27.0" prefWidth="160.0" />
+                        <PasswordField fx:id="passwordField" prefHeight="27.0" prefWidth="141.0" />
                      </children>
                   </StackPane>
                   <ImageView fx:id="image" fitHeight="28.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
@@ -79,10 +79,10 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <StackPane prefHeight="150.0" prefWidth="160.0">
+                  <StackPane prefHeight="50.0" prefWidth="130.0">
                      <children>
                         <TextField fx:id="confirmPVisible" />
-                        <PasswordField fx:id="confirmPasswordField" prefHeight="27.0" prefWidth="160.0" />
+                        <PasswordField fx:id="confirmPasswordField" prefHeight="27.0" prefWidth="146.0" />
                      </children>
                   </StackPane>
                   <ImageView fx:id="cImage" fitHeight="25.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
@@ -91,7 +91,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label alignment="CENTER" prefHeight="35.0" prefWidth="130.0" text="Lingua" />
-                  <ComboBox fx:id="languageChooser" prefWidth="150.0" promptText="Scegli una lingua:" />
+                  <ComboBox fx:id="languageChooser" prefHeight="26.0" prefWidth="158.0" promptText="Scegli una lingua:" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="130.0" prefWidth="514.0">
