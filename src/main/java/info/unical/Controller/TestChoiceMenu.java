@@ -46,7 +46,10 @@ public class TestChoiceMenu {
     private MenuItem spanishItem;
 
     @FXML
-    private VBox centerVbox;
+    private VBox testVbox;
+
+    @FXML
+    private VBox lessonVbox;
 
     private ExecutorService executor = ExecutorProvider.getExecutor();
 
@@ -81,7 +84,10 @@ public class TestChoiceMenu {
     { choosenLanguageImage.setImage(pt); }
 
 
+    void settingLessons()
+    {
 
+    }
     void settingTests() throws ExecutionException, InterruptedException {
         Callable<Integer> callable = null;  //la query che recupera il numero di test in base alla lingua dell'utente
 
@@ -125,7 +131,7 @@ public class TestChoiceMenu {
                         throw new RuntimeException(e);
                     }
                 });
-                centerVbox.getChildren().add(button);
+                testVbox.getChildren().add(button);
 
             }
         }

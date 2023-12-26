@@ -61,6 +61,19 @@
       </HBox>
    </top>
    <center>
-      <VBox fx:id="centerVbox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="lessonVBox" alignment="TOP_CENTER" prefHeight="456.0" prefWidth="382.0" spacing="10.0">
+               <children>
+                  <Label text="Lezioni" />
+               </children>
+            </VBox>
+            <VBox fx:id="testVbox" alignment="TOP_CENTER" prefHeight="456.0" prefWidth="374.0" spacing="10.0">
+               <children>
+                  <Label text="Test" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </center>
 </BorderPane>
