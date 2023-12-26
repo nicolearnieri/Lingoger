@@ -61,9 +61,6 @@
       </HBox>
    </top>
    <center>
-      <VBox fx:id="centerVbox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin></VBox>
+      <VBox fx:id="centerVbox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

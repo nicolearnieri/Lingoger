@@ -104,14 +104,14 @@ class GetTestQuestionsEngCallable implements Callable<Vector<Object>> {
     }
 
     @Override
-        public Vector<Object> call() throws Exception {
-            Vector<Object> result = new Vector<>();
+    public Vector<Object> call() throws Exception {
+        Vector<Object> result = new Vector<>();
         String query = "SELECT * FROM domandeInglese where test = ?";
         try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(id, 1);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while(resultSet.next()) {
+                if (resultSet.next()) {
                     result.add(resultSet.getString("domanda"));
                     result.add(resultSet.getInt("codice"));
                     result.add(resultSet.getString("risposta"));
@@ -140,7 +140,7 @@ class GetTestQuestionsFrenchCallable implements Callable<Vector<Object>> {
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(id, 1);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
+                if (resultSet.next()) {
                     result.add(resultSet.getString("domanda"));
                     result.add(resultSet.getInt("codice"));
                     result.add(resultSet.getString("risposta"));
@@ -169,7 +169,7 @@ class GetTestQuestionsSpanishCallable implements Callable<Vector<Object>> {
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(id, 1);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-               while (resultSet.next()) {
+                if (resultSet.next()) {
                     result.add(resultSet.getString("domanda"));
                     result.add(resultSet.getInt("codice"));
                     result.add(resultSet.getString("risposta"));
@@ -198,7 +198,7 @@ class GetTestQuestionsPortugueseCallable implements Callable<Vector<Object>> {
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(id, 1);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-               while (resultSet.next()) {
+                if (resultSet.next()) {
                     result.add(resultSet.getString("domanda"));
                     result.add(resultSet.getInt("codice"));
                     result.add(resultSet.getString("risposta"));
@@ -227,7 +227,7 @@ class GetAnswersTestEngCallable implements Callable<Vector<String>> {
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(domanda, 1);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-               while (resultSet.next()) {
+                if (resultSet.next()) {
                     result.add(resultSet.getString("risposta1"));
                     result.add(resultSet.getString("risposta2"));
                     result.add(resultSet.getString("risposta3"));

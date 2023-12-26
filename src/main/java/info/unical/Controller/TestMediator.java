@@ -3,7 +3,6 @@ package info.unical.Controller;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -145,15 +144,4 @@ public class TestMediator {
 
     }
 
-    public void setButtonsValues(Vector<String> resultA) {
-        b1.setText(resultA.get(0));
-        b2.setText(resultA.get(1));
-        b3.setText(resultA.get(2));
-        b4.setText(resultA.get(3));
-        b5.setText(resultA.get(4));
-        b6.setText(resultA.get(5));
-        b7.setText(resultA.get(6));
-        b8.setText(resultA.get(7));
-        b9.setText(resultA.get(8));
-    }
 }

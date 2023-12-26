@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 
 public class SceneHandler
@@ -219,7 +218,7 @@ public class SceneHandler
 
     }
 
-    public void setTestMenu(int i, String l) throws IOException, ExecutionException, InterruptedException {
+    public void setTestMenu(int i, String l) throws IOException {
         if(stage!=null) {stage.close();}
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "Test.fxml"));

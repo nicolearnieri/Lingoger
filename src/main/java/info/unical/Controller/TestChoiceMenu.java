@@ -119,10 +119,6 @@ public class TestChoiceMenu {
 
                     } catch (IOException e) {
                         throw new RuntimeException(e);
-                    } catch (ExecutionException e) {
-                        throw new RuntimeException(e);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
                     }
                 });
                 centerVbox.getChildren().add(button);
@@ -132,7 +128,8 @@ public class TestChoiceMenu {
 
     }
 
-    void generateTest(int i, String language) throws IOException, ExecutionException, InterruptedException {
+    void generateTest(int i,
+                      String language) throws IOException {
         SceneHandler.getInstance().setTestMenu(i,language);
     }
 
@@ -188,6 +185,7 @@ public class TestChoiceMenu {
             spanishImage();
         }
         settingTests();
+
     }
 
 }
