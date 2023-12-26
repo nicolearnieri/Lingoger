@@ -213,19 +213,19 @@ class GetTestQuestionsPortugueseCallable implements Callable<Vector<Object>> {
 }
 
 class GetAnswersTestEngCallable implements Callable<Vector<String>> {
-    int domanda;
+    int test;
 
-    GetAnswersTestEngCallable(int domanda) {
-        this.domanda = domanda;
+    GetAnswersTestEngCallable(int test) {
+        this.test = test;
     }
 
     @Override
     public Vector<String> call() throws Exception {
         Vector<String> result = new Vector<>();
-        String query = "SELECT * FROM risposteInglese where domanda = ?";
+        String query = "SELECT * FROM risposteInglese where test = ?";
         try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setInt(domanda, 1);
+            preparedStatement.setInt(test, 1);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                while (resultSet.next()) {
                     result.add(resultSet.getString("risposta1"));
@@ -245,21 +245,21 @@ class GetAnswersTestEngCallable implements Callable<Vector<String>> {
 
 
 class GetAnswersTestSpanishCallable implements Callable<Vector<String>> {
-    int domanda;
+    int test;
 
-    GetAnswersTestSpanishCallable(int domanda) {
-        this.domanda = domanda;
+    GetAnswersTestSpanishCallable(int test) {
+        this.test = test;
     }
 
     @Override
     public Vector<String> call() throws Exception {
         Vector<String> result = new Vector<>();
-        String query = "SELECT * FROM risposteSpagnolo where domanda = ?";
+        String query = "SELECT * FROM risposteSpagnolo where test = ?";
         try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setInt(domanda, 1);
+            preparedStatement.setInt(test, 1);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     result.add(resultSet.getString("risposta1"));
                     result.add(resultSet.getString("risposta2"));
                     result.add(resultSet.getString("risposta3"));
@@ -276,21 +276,21 @@ class GetAnswersTestSpanishCallable implements Callable<Vector<String>> {
 }
 
 class GetAnswersTestFrenchCallable implements Callable<Vector<String>> {
-    int domanda;
+    int test;
 
-    GetAnswersTestFrenchCallable(int domanda) {
-        this.domanda = domanda;
+    GetAnswersTestFrenchCallable(int test) {
+        this.test = test;
     }
 
     @Override
     public Vector<String> call() throws Exception {
         Vector<String> result = new Vector<>();
-        String query = "SELECT * FROM risposteFrancese where domanda = ?";
+        String query = "SELECT * FROM risposteFrancese where test = ?";
         try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setInt(domanda, 1);
+            preparedStatement.setInt(test, 1);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     result.add(resultSet.getString("risposta1"));
                     result.add(resultSet.getString("risposta2"));
                     result.add(resultSet.getString("risposta3"));
@@ -307,19 +307,19 @@ class GetAnswersTestFrenchCallable implements Callable<Vector<String>> {
 }
 
 class GetAnswersTestPortCallable implements Callable<Vector<String>> {
-    int domanda;
+    int test;
 
-    GetAnswersTestPortCallable(int domanda) {
-        this.domanda = domanda;
+    GetAnswersTestPortCallable(int test) {
+        this.test = test;
     }
 
     @Override
     public Vector<String> call() throws Exception {
         Vector<String> result = new Vector<>();
-        String query = "SELECT * FROM rispostePortoghese where domanda = ?";
+        String query = "SELECT * FROM rispostePortoghese where test = ?";
         try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setInt(domanda, 1);
+            preparedStatement.setInt(test, 1);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     result.add(resultSet.getString("risposta1"));
