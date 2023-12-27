@@ -135,6 +135,8 @@ public class TestChoiceMenu {
 
     void settingLessons() throws ExecutionException, InterruptedException {
         lessonVbox.getChildren().clear();
+        lessonVbox.getChildren().add(new Label("Lezioni"));
+
         Future<Integer> res = executor.submit(tasks.get(1));
         int result = res.get();
         System.out.println(result);
@@ -145,11 +147,13 @@ public class TestChoiceMenu {
             {
                 HBox hBox = new HBox();
                 Label label = new Label(lessonInfos.get(i-1));
-                label.setPrefSize(330, 40 );
+                label.setPrefSize(330, 35 );
                 hBox.getChildren().add(label);
-                Button button = new Button("Lezione " + (i));
 
+                Button button = new Button("Lezione " + (i));
+                button.setPrefSize(100, 35 );
                 button.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff ");
+
                 int finalI = i;
                 button.setOnMouseClicked(event -> {
                     try {
@@ -163,6 +167,7 @@ public class TestChoiceMenu {
                         throw new RuntimeException(e);
                     }
                 });
+
                 hBox.getChildren().add(button);
                 lessonVbox.getChildren().add(hBox);
             }
@@ -172,8 +177,10 @@ public class TestChoiceMenu {
 
 
 
-    void settingTests() throws ExecutionException, InterruptedException {
+    void settingTests() throws ExecutionException, InterruptedException
+    {
         testVbox.getChildren().clear();
+        testVbox.getChildren().add(new Label("Test"));
 
         Future<Integer> res = executor.submit(tasks.get(0));
         int result = res.get();
@@ -185,6 +192,8 @@ public class TestChoiceMenu {
             {
                 Button button = new Button("Test " + (i));
                 button.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff ");
+                button.setPrefSize(100, 35);
+
                 int finalI = i;
                 button.setOnMouseClicked(event -> {
                     try {
