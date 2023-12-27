@@ -50,25 +50,25 @@ public class TestMediator {
     public void setButtons(Button b1, Button b2, Button b3, Button b4, Button b5, Button b6, Button b7, Button b8,
             Button b9, Button confirmationButton) {
         this.b1 = b1;
-        b1.setStyle("-fx-background-color: #d75c00");
+        b1.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
         this.b2 = b2;
-        b2.setStyle("-fx-background-color: #d75c00");
+        b2.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
         this.b3 = b3;
-        b3.setStyle("-fx-background-color: #d75c00");
+        b3.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
         this.b4 = b4;
-        b4.setStyle("-fx-background-color: #d75c00");
+        b4.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
         this.b5 = b5;
-        b5.setStyle("-fx-background-color: #d75c00");
+        b5.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
         this.b6 = b6;
-        b6.setStyle("-fx-background-color: #d75c00");
+        b6.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
         this.b7 = b7;
-        b7.setStyle("-fx-background-color: #d75c00");
+        b7.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
         this.b8 = b8;
-        b8.setStyle("-fx-background-color: #d75c00");
+        b8.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
         this.b9 = b9;
-        b9.setStyle("-fx-background-color: #d75c00");
+        b9.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
         this.confirmationButton = confirmationButton;
-        confirmationButton.setStyle("-fx-background-color: #d75c00");
+        confirmationButton.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
         init();
     }
 
@@ -93,7 +93,7 @@ public class TestMediator {
             if (answer.equals(oldAnswer))
             {
                 answers.remove(question);
-                buttonIJustClicked.setStyle("-fx-background-color: #d75c00");
+                buttonIJustClicked.setStyle("-fx-background-color: #d75c00; ; -fx-text-fill: #ffffff");
                 actionOnConfirm();
                 return;
             }
@@ -105,43 +105,43 @@ public class TestMediator {
                 case 1: //risposta alla domanda 1
                     if (oldAnswer.equals(b1.getText()))
                     {
-                        b1.setStyle("-fx-background-color: #d75c00");
+                        b1.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
                     }
                     else if (oldAnswer.equals(b2.getText()))
                     {
-                        b2.setStyle("-fx-background-color: #d75c00");
+                        b2.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
                     }
                     else
                     {
-                        b3.setStyle("-fx-background-color: #d75c00");
+                        b3.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
                     }
                     break;
                 case 2: //risposta alla domanda 2
                     if (oldAnswer.equals(b4.getText()))
                     {
-                        b4.setStyle("-fx-background-color: #d75c00");
+                        b4.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
                     }
                     else if (oldAnswer.equals(b5.getText()))
                     {
-                        b5.setStyle("-fx-background-color: #d75c00");
+                        b5.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
                     }
                     else
                     {
-                        b6.setStyle("-fx-background-color: #d75c00");
+                        b6.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
                     }
                     break;
                 case 3:
                     if (oldAnswer.equals(b7.getText()))
                     {
-                        b7.setStyle("-fx-background-color: #d75c00");
+                        b7.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
                     }
                     else if (oldAnswer.equals(b8.getText()))
                     {
-                        b8.setStyle("-fx-background-color: #d75c00");
+                        b8.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
                     }
                     else
                     {
-                        b9.setStyle("-fx-background-color: #d75c00");
+                        b9.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
                     }
                     break;
             }
@@ -152,10 +152,7 @@ public class TestMediator {
             answers.put(question, answer); //aggiungo la risposta alla domanda
         }
 
-        buttonIJustClicked.setStyle("-fx-background-color: #ffffff"); //è cambiato lol
-        buttonIJustClicked.setStyle("-fx-border-color: #d75c00");
-        buttonIJustClicked.setStyle("-fx-border-width: 2px");
-        buttonIJustClicked.setStyle("-fx-text-fill: #d75c00");
+        buttonIJustClicked.setStyle("-fx-background-color: #ffffff; -fx-border-color: #d75c00; -fx-border-width: 2px; -fx-text-fill: #d75c00"); //è cambiato lol
 
         actionOnConfirm(); //controllo se sono state date tutte le risposte
     }
