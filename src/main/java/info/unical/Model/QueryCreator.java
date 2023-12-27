@@ -151,7 +151,29 @@ import java.util.concurrent.Callable;
             return callable;
         }
 
+        public static Callable<Vector<String>> createRetrieveEnglishLessonInfoCallable(int cod)
+        {
+            GetEnglishLessonInfo callable = new GetEnglishLessonInfo(cod);
+            return callable;
+        }
 
+        public static Callable<Vector<String>> createRetrieveFrenchLessonInfoCallable(int cod)
+        {
+            GetFrenchLessonInfo callable = new GetFrenchLessonInfo(cod);
+            return callable;
+        }
+
+        public static Callable<Vector<String>> createRetrieveSpanishLessonInfoCallable(int cod)
+        {
+            GetSpanishLessonInfo callable = new GetSpanishLessonInfo(cod);
+            return callable;
+        }
+
+        public static Callable<Vector<String>> createRetrievePortugueseLessonInfoCallable(int cod)
+        {
+            GetPortugueseLessonInfo callable = new GetPortugueseLessonInfo(cod);
+            return callable;
+        }
     }
 
 

@@ -1,6 +1,5 @@
 package info.unical.Controller;
 
-import com.sun.javafx.scene.SceneEventDispatcher;
 import info.unical.Model.ExecutorProvider;
 import info.unical.Model.QueryCreator;
 import info.unical.Model.User;
@@ -17,6 +16,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Vector;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -56,6 +56,9 @@ public class TestChoiceMenu {
     User user = User.getInstance();
     TestController testController = TestController.getInstance();
 
+    Vector<Callable<Integer>> tasks = new Vector<Callable<Integer>>();
+    Vector<String> lessonInfos = new Vector<String>();
+
     Image fr = new Image(Objects.requireNonNull(getClass().getResource("/images/french-flag.png")).toExternalForm());
     Image eng = new Image(Objects.requireNonNull(getClass().getResource("/images/english-flag.png")).toExternalForm());
     Image sp = new Image(Objects.requireNonNull(getClass().getResource("/images/spanish-flag.png")).toExternalForm());
@@ -88,6 +91,40 @@ public class TestChoiceMenu {
     {
 
     }
+
+
+    void generateCallables()
+    {
+        Callable<Integer> callable = null;  //la query che recupera il numero di test in base alla lingua dell'utente
+        Callable<Integer> callable2 = null;  //la query che recupera il numero di test in base alla lingua dell'utente
+
+        if (user.getLanguage().equals( "Inglese"))
+        {
+            callable = QueryCreator.createRetrieveTestsEnglishCallable();
+            callable2 = QueryCreator.createRetrieveEnglishLessonsCallable();
+        }
+        else if (user.getLanguage().equals( "Francese"))
+        {
+            callable = QueryCreator.createRetrieveTestsFrenchCallable();
+            callable2 = QueryCreator.createRetrieveFrenchLessonsCallable();
+        }
+        else if (user.getLanguage().equals("Spagnolo"))
+        {
+            callable = QueryCreator.createRetrieveTestsSpanishCallable();
+            callable2= QueryCreator.createRetrieveSpanishLessonsCallable();
+        }
+        else if (user.getLanguage().equals("Portoghese"))
+        {
+            callable = QueryCreator.createRetrieveTestsPortugueseCallable();
+            callable2 = QueryCreator.createRetrievePortugueseLessonsCallable();
+
+        }
+
+        tasks.add(callable);
+        tasks.add(callable2);
+
+    }
+
     void settingTests() throws ExecutionException, InterruptedException {
         Callable<Integer> callable = null;  //la query che recupera il numero di test in base alla lingua dell'utente
 

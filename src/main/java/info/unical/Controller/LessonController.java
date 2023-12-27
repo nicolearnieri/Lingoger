@@ -23,9 +23,9 @@ public class LessonController {
     }
 
     @FXML
-    void closeClicked(ActionEvent event) throws Exception {
+    void closeClicked(ActionEvent event) throws Exception
+    {
         SceneHandler.getInstance().setTestChoiceMenu();
-
     }
 
 }

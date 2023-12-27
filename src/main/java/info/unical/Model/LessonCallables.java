@@ -3,6 +3,7 @@ package info.unical.Model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Vector;
 import java.util.concurrent.Callable;
 
 import static info.unical.Model.DataBaseManager.getConnection;
@@ -92,5 +93,124 @@ class RetrieveSpanishLessonsCallable implements Callable<Integer> {
             }
         }
         return -1;
+    }
+}
+
+
+class GetEnglishLessonInfo implements Callable<Vector<String>> {
+    private int cod ;
+
+    public GetEnglishLessonInfo(int cod )
+    { this.cod = cod; }
+
+    @Override
+    public Vector<String> call() throws Exception
+    {
+        Vector<String> lessonInfos = new Vector<String>();
+        String query = "SELECT nome, descrizione, contenuto FROM lezioniInglese WHERE codice = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, cod);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    lessonInfos.add(resultSet.getString("nome"));
+                    lessonInfos.add(resultSet.getString("descrizione"));
+                    lessonInfos.add(resultSet.getString("contenuto"));
+                    return lessonInfos;
+                }
+            } finally {
+                DataBaseManager.closeConnection();
+            }
+        }
+        return null;
+    }
+}
+
+
+class GetFrenchLessonInfo implements Callable<Vector<String>> {
+    private int cod ;
+
+    public GetFrenchLessonInfo(int cod )
+    { this.cod = cod; }
+
+    @Override
+    public Vector<String> call() throws Exception
+    {
+        Vector<String> lessonInfos = new Vector<String>();
+        String query = "SELECT nome, descrizione, contenuto FROM lezioniFrancese WHERE codice = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, cod);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    lessonInfos.add(resultSet.getString("nome"));
+                    lessonInfos.add(resultSet.getString("descrizione"));
+                    lessonInfos.add(resultSet.getString("contenuto"));
+                    return lessonInfos;
+                }
+            } finally {
+                DataBaseManager.closeConnection();
+            }
+        }
+        return null;
+    }
+}
+
+
+class GetPortugueseLessonInfo implements Callable<Vector<String>> {
+    private int cod ;
+
+    public GetPortugueseLessonInfo(int cod )
+    { this.cod = cod; }
+
+    @Override
+    public Vector<String> call() throws Exception
+    {
+        Vector<String> lessonInfos = new Vector<String>();
+        String query = "SELECT nome, descrizione, contenuto FROM lezioniPortoghese WHERE codice = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, cod);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    lessonInfos.add(resultSet.getString("nome"));
+                    lessonInfos.add(resultSet.getString("descrizione"));
+                    lessonInfos.add(resultSet.getString("contenuto"));
+                    return lessonInfos;
+                }
+            } finally {
+                DataBaseManager.closeConnection();
+            }
+        }
+        return null;
+    }
+}
+
+class GetSpanishLessonInfo implements Callable<Vector<String>> {
+    private int cod ;
+
+    public GetSpanishLessonInfo(int cod )
+    { this.cod = cod; }
+
+    @Override
+    public Vector<String> call() throws Exception
+    {
+        Vector<String> lessonInfos = new Vector<String>();
+        String query = "SELECT nome, descrizione, contenuto FROM lezioniSpagnolo WHERE codice = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, cod);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    lessonInfos.add(resultSet.getString("nome"));
+                    lessonInfos.add(resultSet.getString("descrizione"));
+                    lessonInfos.add(resultSet.getString("contenuto"));
+                    return lessonInfos;
+                }
+            } finally {
+                DataBaseManager.closeConnection();
+            }
+        }
+        return null;
     }
 }

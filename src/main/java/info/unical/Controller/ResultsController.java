@@ -28,13 +28,9 @@ public class ResultsController {
     {
         correctAnsLabel.setText("Correct answers: " + correctAnswers);
         if (correctAnswers == 3)
-        {
-            isabelleImage.setImage(isabelleAwesome);
-        }
+        {  isabelleImage.setImage(isabelleAwesome); }
         else
-        {
-            isabelleImage.setImage(isabelleOk);
-        }
+        {  isabelleImage.setImage(isabelleOk); }
     }
 
     @FXML
