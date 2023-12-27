@@ -123,11 +123,12 @@ public class TestChoiceMenu {
 
         tasks.add(callable);
         tasks.add(callable2);
+        settingTests();
 
         Future<Vector<String>> future = executor.submit(infosCallable);
         lessonInfos = future.get();
 
-        settingTests();
+
         settingLessons();
 
     }

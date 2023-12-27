@@ -22,8 +22,6 @@ class RetrieveEnglishLessonsCallable implements Callable<Integer> {
                 if (resultSet.next()) {
                     return resultSet.getInt(1);
                 }
-            } finally {
-                DataBaseManager.closeConnection();
             }
         }
         return -1;
@@ -44,9 +42,8 @@ class RetrieveFrenchLessonsCallable implements Callable<Integer> {
                 if (resultSet.next()) {
                     return resultSet.getInt(1);
                 }
-            } finally {
-                DataBaseManager.closeConnection();
             }
+
         }
         return -1;
     }
@@ -66,8 +63,6 @@ class RetrievePortugueseLessonsCallable implements Callable<Integer> {
                 if (resultSet.next()) {
                     return resultSet.getInt(1);
                 }
-            } finally {
-                DataBaseManager.closeConnection();
             }
         }
         return -1;
@@ -88,8 +83,6 @@ class RetrieveSpanishLessonsCallable implements Callable<Integer> {
                 if (resultSet.next()) {
                     return resultSet.getInt(1);
                 }
-            } finally {
-                DataBaseManager.closeConnection();
             }
         }
         return -1;
@@ -118,8 +111,6 @@ class GetEnglishLessonInfo implements Callable<Vector<String>> {
                     lessonInfos.add(resultSet.getString("contenuto"));
                     return lessonInfos;
                 }
-            } finally {
-                DataBaseManager.closeConnection();
             }
         }
         return null;
@@ -148,8 +139,6 @@ class GetFrenchLessonInfo implements Callable<Vector<String>> {
                     lessonInfos.add(resultSet.getString("contenuto"));
                     return lessonInfos;
                 }
-            } finally {
-                DataBaseManager.closeConnection();
             }
         }
         return null;
@@ -178,10 +167,8 @@ class GetPortugueseLessonInfo implements Callable<Vector<String>> {
                     lessonInfos.add(resultSet.getString("contenuto"));
                     return lessonInfos;
                 }
-            } finally {
-                DataBaseManager.closeConnection();
             }
-        }
+            }
         return null;
     }
 }
@@ -207,8 +194,6 @@ class GetSpanishLessonInfo implements Callable<Vector<String>> {
                     lessonInfos.add(resultSet.getString("contenuto"));
                     return lessonInfos;
                 }
-            } finally {
-                DataBaseManager.closeConnection();
             }
         }
         return null;
@@ -229,8 +214,6 @@ class RetrieveEnglishDescriptionCallable implements Callable<Vector<String>>
                 while (resultSet.next()) {
                     lessonInfos.add(resultSet.getString(1));
                 }
-            } finally {
-                DataBaseManager.closeConnection();
             }
         }
         return lessonInfos;
@@ -272,8 +255,6 @@ class RetrieveFrenchDescriptionCallable implements Callable<Vector<String>>
                 while (resultSet.next()) {
                     lessonInfos.add(resultSet.getString(1));
                 }
-            } finally {
-                DataBaseManager.closeConnection();
             }
         }
         return lessonInfos;
@@ -295,8 +276,6 @@ class RetrievePortugueseDescriptionCallable implements Callable<Vector<String>>
                 while (resultSet.next()) {
                     lessonInfos.add(resultSet.getString(1));
                 }
-            } finally {
-                DataBaseManager.closeConnection();
             }
         }
         return lessonInfos;

@@ -22,9 +22,7 @@ class RetrieveTestsEnglishCallable implements Callable<Integer> {
                     return resultSet.getInt(1);
                 }
             }
-            finally {
-                DataBaseManager.closeConnection();
-            }
+
         }
         return -1;
     }
@@ -43,9 +41,6 @@ class RetrieveTestsFrenchCallable implements Callable<Integer> {
                 if (resultSet.next()) {
                     return resultSet.getInt(1);
                 }
-            }
-            finally {
-                DataBaseManager.closeConnection();
             }
         }
         return -1;
@@ -66,9 +61,7 @@ class RetrieveTestsSpanishCallable implements Callable<Integer> {
                     return resultSet.getInt(1);
                 }
             }
-            finally {
-                DataBaseManager.closeConnection();
-            }
+
         }
         return -1;
     }
@@ -88,9 +81,7 @@ class RetrieveTestsPortugueseCallable implements Callable<Integer> {
                     return resultSet.getInt(1);
                 }
             }
-            finally {
-                DataBaseManager.closeConnection();
-            }
+
         }
         return -1;
     }
@@ -117,9 +108,7 @@ class GetTestQuestionsEngCallable implements Callable<Vector<Object>> {
                     result.add(resultSet.getString("risposta"));
                 }
             }
-            finally {
-                DataBaseManager.closeConnection();
-            }
+
         }
         return result;
     }
@@ -146,9 +135,7 @@ class GetTestQuestionsFrenchCallable implements Callable<Vector<Object>> {
                     result.add(resultSet.getString("risposta"));
                 }
             }
-            finally {
-                DataBaseManager.closeConnection();
-            }
+
         }
         return result;
     }
@@ -175,9 +162,7 @@ class GetTestQuestionsSpanishCallable implements Callable<Vector<Object>> {
                     result.add(resultSet.getString("risposta"));
                 }
             }
-            finally {
-                DataBaseManager.closeConnection();
-            }
+
         }
         return result;
     }
@@ -204,9 +189,7 @@ class GetTestQuestionsPortugueseCallable implements Callable<Vector<Object>> {
                     result.add(resultSet.getString("risposta"));
                 }
             }
-            finally {
-                DataBaseManager.closeConnection();
-            }
+
         }
         return result;
     }
@@ -233,10 +216,6 @@ class GetAnswersTestEngCallable implements Callable<Vector<String>> {
                     result.add(resultSet.getString("risposta3"));
                     //result.add(resultSet.getString("rispostaOK"));
                 }
-            }
-            finally
-            {
-                DataBaseManager.closeConnection();
             }
             return result;
         }
@@ -266,10 +245,7 @@ class GetAnswersTestSpanishCallable implements Callable<Vector<String>> {
                     //result.add(resultSet.getString("rispostaOK"));
                 }
             }
-            finally
-            {
-                DataBaseManager.closeConnection();
-            }
+
             return result;
         }
     }
@@ -297,10 +273,7 @@ class GetAnswersTestFrenchCallable implements Callable<Vector<String>> {
                     //result.add(resultSet.getString("rispostaOK"));
                 }
             }
-            finally
-            {
-                DataBaseManager.closeConnection();
-            }
+
             return result;
         }
     }
@@ -327,10 +300,6 @@ class GetAnswersTestPortCallable implements Callable<Vector<String>> {
                     result.add(resultSet.getString("risposta3"));
                     //result.add(resultSet.getString("rispostaOK"));
                 }
-            }
-            finally
-            {
-                DataBaseManager.closeConnection();
             }
             return result;
         }
