@@ -109,7 +109,7 @@ class GetTestQuestionsEngCallable implements Callable<Vector<Object>> {
         String query = "SELECT * FROM domandeInglese where test = ?";
         try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setInt(id, 1);
+            preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while(resultSet.next()) {
                     result.add(resultSet.getString("domanda"));
@@ -167,7 +167,7 @@ class GetTestQuestionsSpanishCallable implements Callable<Vector<Object>> {
         String query = "SELECT * FROM domandeSpagnolo where test = ?";
         try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setInt(id, 1);
+            preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                while (resultSet.next()) {
                     result.add(resultSet.getString("domanda"));
@@ -196,7 +196,7 @@ class GetTestQuestionsPortugueseCallable implements Callable<Vector<Object>> {
         String query = "SELECT * FROM domandePortoghese where test = ?";
         try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setInt(id, 1);
+            preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                while (resultSet.next()) {
                     result.add(resultSet.getString("domanda"));
@@ -225,7 +225,7 @@ class GetAnswersTestEngCallable implements Callable<Vector<String>> {
         String query = "SELECT * FROM risposteInglese where test = ?";
         try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setInt(test, 1);
+            preparedStatement.setInt(1, test);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                while (resultSet.next()) {
                     result.add(resultSet.getString("risposta1"));

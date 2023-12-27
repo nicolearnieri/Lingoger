@@ -71,7 +71,7 @@ public class TestChoiceMenu {
         else if (user.getLanguage().equals("Francese")) frenchImage();
         else if (user.getLanguage().equals("Spagnolo")) spanishImage();
         else if (user.getLanguage().equals("Portoghese")) portugueseImage();
-        settingTests();
+        generateCallablesForCounts();
     }
 
     void englishImage()
@@ -87,14 +87,8 @@ public class TestChoiceMenu {
     { choosenLanguageImage.setImage(pt); }
 
 
-    void settingLessons()
-    {
 
-    }
-
-
-    void generateCallables()
-    {
+    void generateCallablesForCounts() throws ExecutionException, InterruptedException {
         Callable<Integer> callable = null;  //la query che recupera il numero di test in base alla lingua dell'utente
         Callable<Integer> callable2 = null;  //la query che recupera il numero di test in base alla lingua dell'utente
 
@@ -123,29 +117,47 @@ public class TestChoiceMenu {
         tasks.add(callable);
         tasks.add(callable2);
 
+        settingTests();
+        settingLessons();
+
     }
 
+    void settingLessons() throws ExecutionException, InterruptedException {
+        lessonVbox.getChildren().clear();
+        Future<Integer> res = executor.submit(tasks.get(1));
+        int result = res.get();
+        System.out.println(result);
+
+        if (result != -1)
+        {
+            for (int i= 1; i<= result; i++ )
+            {
+                Button button = new Button("Lezione " + (i));
+                button.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff ");
+                int finalI = i;
+                button.setOnMouseClicked(event -> {
+                    try {
+                        generateLesson(finalI,user.getLanguage());
+
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (ExecutionException e) {
+                        throw new RuntimeException(e);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                lessonVbox.getChildren().add(button);
+            }
+        }
+
+    }
+
+
+
     void settingTests() throws ExecutionException, InterruptedException {
-        Callable<Integer> callable = null;  //la query che recupera il numero di test in base alla lingua dell'utente
-
-        if (user.getLanguage().equals( "Inglese"))
-        {
-           callable = QueryCreator.createRetrieveTestsEnglishCallable();
-        }
-        else if (user.getLanguage().equals( "Francese"))
-        {
-            callable = QueryCreator.createRetrieveTestsFrenchCallable();
-        }
-        else if (user.getLanguage().equals("Spagnolo"))
-        {
-             callable = QueryCreator.createRetrieveTestsSpanishCallable();
-        }
-        else if (user.getLanguage().equals("Portoghese"))
-        {
-           callable = QueryCreator.createRetrieveTestsPortugueseCallable();
-        }
-
-        Future<Integer> res = executor.submit(callable);
+        testVbox.getChildren().clear();
+        Future<Integer> res = executor.submit(tasks.get(0));
         int result = res.get();
         System.out.println(result);
 
@@ -155,6 +167,7 @@ public class TestChoiceMenu {
             {
                 Button button = new Button("Test " + (i));
                 button.setStyle("-fx-background-color: #d75c00");
+                button.setStyle("-fx-text-fill: #ffffff");
                 int finalI = i;
                 button.setOnMouseClicked(event -> {
                     try {
@@ -169,7 +182,6 @@ public class TestChoiceMenu {
                     }
                 });
                 testVbox.getChildren().add(button);
-
             }
         }
 
@@ -177,6 +189,10 @@ public class TestChoiceMenu {
 
     void generateTest(int i, String language) throws IOException, ExecutionException, InterruptedException {
         SceneHandler.getInstance().setTestMenu(i,language);
+    }
+
+    private void generateLesson(int finalI, String language) throws IOException, ExecutionException, InterruptedException {
+        SceneHandler.getInstance().setLesson(finalI,language);
     }
 
     @FXML

@@ -63,7 +63,7 @@
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="lessonVBox" alignment="TOP_CENTER" prefHeight="456.0" prefWidth="382.0" spacing="10.0">
+            <VBox fx:id="lessonVbox" alignment="TOP_CENTER" prefHeight="456.0" prefWidth="382.0" spacing="10.0">
                <children>
                   <Label text="Lezioni" />
                </children>
