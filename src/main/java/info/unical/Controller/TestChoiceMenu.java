@@ -12,6 +12,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -91,31 +92,40 @@ public class TestChoiceMenu {
     void generateCallablesForCounts() throws ExecutionException, InterruptedException {
         Callable<Integer> callable = null;  //la query che recupera il numero di test in base alla lingua dell'utente
         Callable<Integer> callable2 = null;  //la query che recupera il numero di test in base alla lingua dell'utente
+        Callable<Vector<String>> infosCallable = null;
 
         if (user.getLanguage().equals( "Inglese"))
         {
             callable = QueryCreator.createRetrieveTestsEnglishCallable();
             callable2 = QueryCreator.createRetrieveEnglishLessonsCallable();
+            infosCallable= QueryCreator.createRetrieveEnglishDescriptionCallable();
+
         }
         else if (user.getLanguage().equals( "Francese"))
         {
             callable = QueryCreator.createRetrieveTestsFrenchCallable();
             callable2 = QueryCreator.createRetrieveFrenchLessonsCallable();
+            infosCallable= QueryCreator.createRetrieveFrenchDescriptionCallable();
         }
         else if (user.getLanguage().equals("Spagnolo"))
         {
             callable = QueryCreator.createRetrieveTestsSpanishCallable();
             callable2= QueryCreator.createRetrieveSpanishLessonsCallable();
+            infosCallable= QueryCreator.createRetrieveSpanishDescriptionCallable();
         }
         else if (user.getLanguage().equals("Portoghese"))
         {
             callable = QueryCreator.createRetrieveTestsPortugueseCallable();
             callable2 = QueryCreator.createRetrievePortugueseLessonsCallable();
+            infosCallable= QueryCreator.createRetrievePortugueseDescriptionCallable();
 
         }
 
         tasks.add(callable);
         tasks.add(callable2);
+
+        Future<Vector<String>> future = executor.submit(infosCallable);
+        lessonInfos = future.get();
 
         settingTests();
         settingLessons();
@@ -132,7 +142,12 @@ public class TestChoiceMenu {
         {
             for (int i= 1; i<= result; i++ )
             {
+                HBox hBox = new HBox();
+                Label label = new Label(lessonInfos.get(i-1));
+                label.setPrefSize(330, 40 );
+                hBox.getChildren().add(label);
                 Button button = new Button("Lezione " + (i));
+
                 button.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff ");
                 int finalI = i;
                 button.setOnMouseClicked(event -> {
@@ -147,7 +162,8 @@ public class TestChoiceMenu {
                         throw new RuntimeException(e);
                     }
                 });
-                lessonVbox.getChildren().add(button);
+                hBox.getChildren().add(button);
+                lessonVbox.getChildren().add(hBox);
             }
         }
 
@@ -157,6 +173,7 @@ public class TestChoiceMenu {
 
     void settingTests() throws ExecutionException, InterruptedException {
         testVbox.getChildren().clear();
+
         Future<Integer> res = executor.submit(tasks.get(0));
         int result = res.get();
         System.out.println(result);
@@ -166,8 +183,7 @@ public class TestChoiceMenu {
             for (int i= 1; i<= result; i++ )
             {
                 Button button = new Button("Test " + (i));
-                button.setStyle("-fx-background-color: #d75c00");
-                button.setStyle("-fx-text-fill: #ffffff");
+                button.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff ");
                 int finalI = i;
                 button.setOnMouseClicked(event -> {
                     try {
@@ -196,8 +212,7 @@ public class TestChoiceMenu {
     }
 
     @FXML
-    void englishLanguage(ActionEvent event)
-    {
+    void englishLanguage(ActionEvent event) throws ExecutionException, InterruptedException {
         if (user.getLanguage() != "Inglese")
         {
             Callable<Boolean> updateTask = QueryCreator.createUpdateOnUser(user.getNomeUtente(), "Inglese");
@@ -205,8 +220,8 @@ public class TestChoiceMenu {
             user.setLanguage("Inglese");
             choosenLanguageLabel.setText(user.getLanguage());
             englishImage();
-
         }
+        generateCallablesForCounts();
     }
 
     @FXML
@@ -219,7 +234,7 @@ public class TestChoiceMenu {
             choosenLanguageLabel.setText(user.getLanguage());
             frenchImage();
         }
-        settingTests();
+        generateCallablesForCounts();
     }
 
     @FXML
@@ -232,7 +247,7 @@ public class TestChoiceMenu {
             choosenLanguageLabel.setText(user.getLanguage());
             portugueseImage();
         }
-        settingTests();
+        generateCallablesForCounts();
 
     }
 
@@ -246,7 +261,7 @@ public class TestChoiceMenu {
             choosenLanguageLabel.setText(user.getLanguage());
             spanishImage();
         }
-        settingTests();
+        generateCallablesForCounts();
     }
 
 }

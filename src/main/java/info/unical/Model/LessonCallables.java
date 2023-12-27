@@ -214,3 +214,95 @@ class GetSpanishLessonInfo implements Callable<Vector<String>> {
         return null;
     }
 }
+
+class RetrieveEnglishDescriptionCallable implements Callable<Vector<String>>
+{
+    public RetrieveEnglishDescriptionCallable() {}
+
+    @Override
+    public Vector<String> call() throws Exception {
+        Vector<String> lessonInfos = new Vector<String>();
+        String query = "SELECT descrizione FROM lezioniInglese";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    lessonInfos.add(resultSet.getString(1));
+                }
+            } finally {
+                DataBaseManager.closeConnection();
+            }
+        }
+        return lessonInfos;
+
+    }
+}
+
+class RetrieveSpanishDescriptionCallable implements Callable<Vector<String>>
+{
+    public RetrieveSpanishDescriptionCallable() {}
+
+    @Override
+    public Vector<String> call() throws Exception {
+        Vector<String> lessonInfos = new Vector<String>();
+        String query = "SELECT descrizione FROM lezioniSpagnolo";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    lessonInfos.add(resultSet.getString(1));
+                }
+            }
+        }
+        return lessonInfos;
+
+    }
+}
+class RetrieveFrenchDescriptionCallable implements Callable<Vector<String>>
+{
+    public RetrieveFrenchDescriptionCallable() {}
+
+    @Override
+    public Vector<String> call() throws Exception {
+        Vector<String> lessonInfos = new Vector<String>();
+        String query = "SELECT descrizione FROM lezioniFrancese";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    lessonInfos.add(resultSet.getString(1));
+                }
+            } finally {
+                DataBaseManager.closeConnection();
+            }
+        }
+        return lessonInfos;
+
+    }
+}
+
+class RetrievePortugueseDescriptionCallable implements Callable<Vector<String>>
+{
+    public RetrievePortugueseDescriptionCallable() {}
+
+    @Override
+    public Vector<String> call() throws Exception {
+        Vector<String> lessonInfos = new Vector<String>();
+        String query = "SELECT descrizione FROM lezioniPortoghese";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    lessonInfos.add(resultSet.getString(1));
+                }
+            } finally {
+                DataBaseManager.closeConnection();
+            }
+        }
+        return lessonInfos;
+
+    }
+}
+
+
+

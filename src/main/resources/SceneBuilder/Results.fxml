@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="545.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="info.unical.Controller.ResultsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="info.unical.Controller.ResultsController">
    <top>
       <HBox alignment="BOTTOM_LEFT" prefHeight="121.0" prefWidth="600.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
@@ -39,7 +39,10 @@
             </ImageView>
             <Label text="Ti ringraziamo di aver completato il test!" />
             <Label text="Il tuo risultato è:" />
-            <Label fx:id="correctAnsLabel" text="Label" />
+            <Label fx:id="correctAnsLabel" text="Label">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin></Label>
             <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeClicked" text="Chiudi" />
          </children>
       </VBox>

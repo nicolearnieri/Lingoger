@@ -44,7 +44,7 @@ public class SceneHandler
 
         stage = primaryStage;
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "Start.fxml"));
-        scene = new Scene(loader.load(), 550, 400); //v:larghezza, v1:altezza
+        scene = new Scene(loader.load(), 550, 350); //v:larghezza, v1:altezza
         StartController controller= loader.getController();
         changedTheme(scene);
         stage.setTitle("Lingoger");
@@ -204,7 +204,7 @@ public class SceneHandler
         if(stage!=null) {stage.close();}
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "TestChoiceMenu.fxml"));
-        scene = new Scene(loader.load(), 510, 500); //v:larghezza, v1:altezza
+        scene = new Scene(loader.load(), 850, 600); //v:larghezza, v1:altezza
 
         TestChoiceMenu controller = loader.getController();
         changedTheme(scene);
@@ -223,7 +223,7 @@ public class SceneHandler
         if(stage!=null) {stage.close();}
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "Test.fxml"));
-        scene = new Scene(loader.load(), 510, 500); //v:larghezza, v1:altezza
+        scene = new Scene(loader.load(), 650, 600); //v:larghezza, v1:altezza
 
         TestController controller = loader.getController();
         changedTheme(scene);
@@ -241,7 +241,7 @@ public class SceneHandler
         if(stage!=null) {stage.close();}
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "Results.fxml"));
-        scene = new Scene(loader.load(), 510, 500); //v:larghezza, v1:altezza
+        scene = new Scene(loader.load(), 650, 600); //v:larghezza, v1:altezza
 
         ResultsController controller = loader.getController();
         changedTheme(scene);
@@ -259,7 +259,7 @@ public class SceneHandler
         if(stage!=null) {stage.close();}
         stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "Lesson.fxml"));
-        scene = new Scene(loader.load(), 510, 500); //v:larghezza, v1:altezza
+        scene = new Scene(loader.load(), 650, 650); //v:larghezza, v1:altezza
 
         LessonController controller = loader.getController();
         changedTheme(scene);
