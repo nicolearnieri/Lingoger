@@ -402,7 +402,7 @@ class GetIfTestHasBeenDoneCallable implements Callable<Boolean> {
 
     @Override
     public Boolean call() throws Exception {
-        String query = "SELECT * FROM testSvolti WHERE test = ? AND utente = ? AND lingua = ?";
+        String query = "SELECT * FROM testSvolti WHERE test = ? AND user = ? AND lingua = ?";
         try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(1, test);

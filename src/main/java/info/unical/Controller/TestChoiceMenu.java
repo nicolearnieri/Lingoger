@@ -162,14 +162,23 @@ public class TestChoiceMenu {
 
                 int finalI = i;
                 button.setOnMouseClicked(event -> {
-                    try {
-                        generateLesson(finalI,user.getLanguage());
-
-                    } catch (IOException e) {
+                    Callable<Boolean> callable1 = QueryCreator.createGetIfLessonHasBeenDoneCallable(finalI, user.getLanguage(), user.getNomeUtente());
+                    Future<Boolean> future1 = executor.submit(callable1);
+                    try
+                    {
+                        if (future1.get())
+                        {
+                            if (SceneHandler.getInstance().showConfirmation("Hai già svolto questa lezione.\nVuoi aprirla comunque?", "Lezione già svolta"))
+                            {
+                                generateLesson(finalI,user.getLanguage());
+                            }
+                        }
+                        else generateLesson(finalI,user.getLanguage());
+                    } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     } catch (ExecutionException e) {
                         throw new RuntimeException(e);
-                    } catch (InterruptedException e) {
+                    } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 });
@@ -208,14 +217,23 @@ public class TestChoiceMenu {
 
                 int finalI = i;
                 button.setOnMouseClicked(event -> {
-                    try {
-                        generateTest(finalI,user.getLanguage());
-
-                    } catch (IOException e) {
+                    Callable<Boolean> callable1 = QueryCreator.createGetIfTestHasBeenDoneCallable(finalI, user.getLanguage(), user.getNomeUtente());
+                    Future<Boolean> future1 = executor.submit(callable1);
+                    try
+                    {
+                        if (future1.get())
+                        {
+                            if (SceneHandler.getInstance().showConfirmation("Hai già svolto questo test.\nVuoi aprirlo comunque?", "Test già svolto"))
+                            {
+                                generateTest(finalI,user.getLanguage());
+                            }
+                        }
+                        else generateTest(finalI,user.getLanguage());
+                    } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     } catch (ExecutionException e) {
                         throw new RuntimeException(e);
-                    } catch (InterruptedException e) {
+                    } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 });

@@ -232,6 +232,18 @@ import java.util.concurrent.Callable;
             return callable;
         }
 
+        public static Callable<Boolean> createGetIfLessonHasBeenDoneCallable(int lesson, String language, String user)
+        {
+        	GetIfLessonHasBeenDoneCallable callable = new GetIfLessonHasBeenDoneCallable(lesson, language, user);
+        	return callable;
+        }
+
+        public static Callable<Boolean> createGetIfTestHasBeenDoneCallable(int test, String language, String user)
+        {
+        	GetIfTestHasBeenDoneCallable callable = new GetIfTestHasBeenDoneCallable(test, language, user);
+        	return callable;
+        }
+
     }
 
 
