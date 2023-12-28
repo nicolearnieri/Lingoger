@@ -2,15 +2,16 @@
     -fx-background-color: #fef3eb;
 }
 
-#logButton, #logInButton, #accessButton, #registrationButton, #signUpButton, #closeButton {
+#logButton, #logInButton, #accessButton, #registrationButton, #signUpButton, #closeButton
+{
     -fx-background-color: #d75c00;
     -fx-text-fill: #ffdcc9;
 
 }
 
-#logButton, #logInButton, #accessButton, #registrationButton, #signUpButton, #closeButton :hover
+#logButton :hover, #logInButton:hover, #accessButton:hover, #registrationButton:hover, #signUpButton:hover, #closeButton :hover
 {
-
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0);
 }
 
 .text-field
@@ -19,15 +20,27 @@
     -fx-text-fill: #602a01;
 }
 
+
 .menu-button
 {
     -fx-background-color: #f9a86d;
     -fx-text-fill: #ffdcc9;
 }
 
-.combo-box
+.menu-button:hover
+{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0);
+}
+
+.menu-item
 {
     -fx-background-color: #f9a86d;
     -fx-text-fill: #ffdcc9;
-
 }
+
+.menu-item:hover
+{
+    -fx-background-color: #d75c00;
+}
+
+
