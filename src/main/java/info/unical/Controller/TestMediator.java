@@ -5,7 +5,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
+import info.unical.Model.ExecutorProvider;
+import info.unical.Model.QueryCreator;
+import info.unical.Model.User;
 import info.unical.View.SceneHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +26,9 @@ public class TestMediator {
     Map<Integer, Integer> map = new HashMap<>(); //mappa per le risposteù
     Map<Integer, String> answers  = new HashMap<>(); //mappa per le risposte
     Map<Button, Integer> buttonToNumber = new HashMap<>();
+
+    private ExecutorService executor = ExecutorProvider.getExecutor();
+    private User user = User.getInstance();
 
 
     private TestMediator() {}
@@ -172,13 +181,20 @@ public class TestMediator {
 
     }
 
-    public void checkAnswers(Vector<String> answersV) throws IOException {
+    public void checkAnswers(Vector<String> answersV, int cod) throws IOException {
         int correctAnswers = 0;
         for (int i = 0; i < answersV.size(); i++)
         {
             if (answersV.get(i).equals(answers.get(i+1)))
             { correctAnswers++; }
         }
+        //aggiorno, l'utente ha svolto la lezione
+        if (cod != 0)
+        {
+            Callable<Boolean> callable = QueryCreator.createAddTestDoneCallable(cod, user.getNomeUtente(), user.getLanguage());
+            Future<Boolean> future = executor.submit(callable);
+        }
+
         SceneHandler.getInstance().setResults(correctAnswers);
     }
 

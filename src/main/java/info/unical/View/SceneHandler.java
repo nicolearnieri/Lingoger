@@ -206,7 +206,7 @@ public class SceneHandler
         alertConfirmation.setContentText(message);
         alertConfirmation.getDialogPane().setPrefWidth(600);
 
-        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeYes = new ButtonType("Si");
         ButtonType buttonTypeNo = new ButtonType("No");
 
         alertConfirmation.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);

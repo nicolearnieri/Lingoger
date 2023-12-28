@@ -30,9 +30,12 @@ public class LessonController {
 
     User user = User.getInstance();
 
+    int currentLesson = 0;
+
     public void init(int finalI, String language) throws ExecutionException, InterruptedException {
         Callable<Vector<String>> callable = null;
         Vector<String> infos = null;
+        currentLesson = finalI;
 
         if (language.equals("Inglese"))
         { callable = QueryCreator.createRetrieveEnglishLessonInfoCallable(finalI); }
@@ -57,6 +60,10 @@ public class LessonController {
     @FXML
     void closeClicked(ActionEvent event) throws Exception
     {
+        //aggiorno, l'utente ha svolto la lezione
+        Callable<Boolean> callable = QueryCreator.createAddLessonDoneCallable(currentLesson, user.getNomeUtente(), user.getLanguage());
+        Future<Boolean> future = executor.submit(callable);
+
         SceneHandler.getInstance().setTestChoiceMenu();
     }
 

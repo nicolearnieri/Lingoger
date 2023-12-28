@@ -62,6 +62,8 @@ public class TestController {
     private static TestController instance = null;
     Vector<String> answers = new Vector<>();
 
+    int currentTest=0;
+
     public static TestController getInstance() {
     	if(instance == null)
     		instance = new TestController();
@@ -76,6 +78,9 @@ public class TestController {
     public void setTest(int i,String language) throws ExecutionException, InterruptedException {
         //in base a language chiami la query giusta con i come parametro
         //in base a i setta il test corretto
+
+        currentTest = i;
+
         Callable<Vector<Object>> callableForQ = null;  //la query che recupera le domande per il test
         Callable<Vector<String>> callableForA = null;  //la query che recupera le risposte per ogni domanda del test
         if (user.getLanguage().equals( "Inglese"))
@@ -98,8 +103,6 @@ public class TestController {
             callableForQ = QueryCreator.createRetrieveQuestionsPortugueseCallable(i);
             callableForA = QueryCreator.createRetrieveAnswersPortugueseCallable(i);
         }
-
-
 
 
         //executor.submit(callableForQ);
@@ -133,7 +136,7 @@ public class TestController {
 
     @FXML  //cosa succede se il button di conferma, abilitato dal mediatore, viene cliccato
     void confirmationClick(ActionEvent event) throws IOException {
-        mediator.checkAnswers(answers);
+        mediator.checkAnswers(answers, currentTest);
 
     }
 

@@ -219,6 +219,19 @@ import java.util.concurrent.Callable;
             GetTestInfosPortugueseCallable callable = new GetTestInfosPortugueseCallable();
             return callable;
         }
+
+        public static Callable<Boolean> createAddTestDoneCallable(int codice, String username, String lingua )
+        {
+            AddTestDoneCallable callable = new AddTestDoneCallable(codice, lingua, username);
+            return callable;
+        }
+
+        public static Callable<Boolean> createAddLessonDoneCallable(int codice, String username, String lingua )
+        {
+            AddLessonDoneCallable callable = new AddLessonDoneCallable(codice, lingua, username);
+            return callable;
+        }
+
     }
 
 

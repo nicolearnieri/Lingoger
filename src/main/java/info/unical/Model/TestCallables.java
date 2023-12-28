@@ -389,3 +389,59 @@ class GetTestInfosPortugueseCallable implements Callable<Vector<String>> {
         return result;
     }
 }
+
+class GetIfTestHasBeenDoneCallable implements Callable<Boolean> {
+    private int test;
+    private String language, user;
+
+    public GetIfTestHasBeenDoneCallable(int test, String language, String user) {
+        this.test = test;
+        this.language  = language;
+        this.user = user;
+    }
+
+    @Override
+    public Boolean call() throws Exception {
+        String query = "SELECT * FROM testSvolti WHERE test = ? AND utente = ? AND lingua = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, test);
+            preparedStatement.setString(2, user);
+            preparedStatement.setString(3, language);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+
+class AddTestDoneCallable implements Callable<Boolean> {
+    private int test;
+    private String language, user;
+
+    public AddTestDoneCallable(int test, String language, String user) {
+        this.test = test;
+        this.language = language;
+        this.user = user;
+    }
+
+    @Override
+    public Boolean call() throws Exception {
+        String query = "INSERT INTO testSvolti (test, user, lingua) VALUES (?, ?, ?)";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, test);
+            preparedStatement.setString(2, user);
+            preparedStatement.setString(3, language);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            System.err.println("Errore durante l'inserimento dell'utente: " + e.getMessage());
+            return false;
+        }
+    }
+}

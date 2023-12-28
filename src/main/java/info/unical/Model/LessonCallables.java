@@ -284,4 +284,62 @@ class RetrievePortugueseDescriptionCallable implements Callable<Vector<String>>
 }
 
 
+class GetIfLessonHasBeenDoneCallable implements Callable<Boolean> {
+    private int lesson;
+    private String language, user;
+
+    public GetIfLessonHasBeenDoneCallable(int lesson, String language, String user) {
+        this.lesson = lesson;
+        this.language  = language;
+        this.user = user;
+    }
+
+    @Override
+    public Boolean call() throws Exception {
+        String query = "SELECT * FROM lezioniSvolte WHERE lezione = ? AND user = ? AND lingua = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, lesson);
+            preparedStatement.setString(2, user);
+            preparedStatement.setString(3, language);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+}
+
+
+class AddLessonDoneCallable implements Callable<Boolean> {
+    private int lesson;
+    private String language, user;
+
+    public AddLessonDoneCallable(int lesson, String language, String user) {
+        this.lesson = lesson;
+        this.language  = language;
+        this.user = user;
+    }
+
+    @Override
+    public Boolean call() throws Exception {
+        String query = "INSERT INTO lezioniSvolte (lezione, user, lingua) VALUES (?, ?, ?)";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, lesson);
+            preparedStatement.setString(2, user);
+            preparedStatement.setString(3, language);
+            int rowsAffected= preparedStatement.executeUpdate();
+            return rowsAffected>0;
+        }
+        catch (Exception e) {
+            System.err.println("Errore durante l'inserimento dell'utente: " + e.getMessage());
+            return false;}
+    }
+
+}
+
 
