@@ -162,7 +162,7 @@ public class SceneHandler
         logInOrSignUpStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "SignUp.fxml"));
 
-        logInScene = new Scene(loader.load(), 510, 540); //v:larghezza, v1:altezza
+        logInScene = new Scene(loader.load(), 510, 630); //v:larghezza, v1:altezza
 
         logInOrSignUpStage.initModality(Modality.APPLICATION_MODAL); // Imposta la finestra come modale, quindi non permette di interagire con altre finestre
 

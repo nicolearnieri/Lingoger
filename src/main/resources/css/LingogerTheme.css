@@ -44,3 +44,25 @@
 }
 
 
+.combo-box
+{
+    -fx-background-color: #f9a86d;
+    -fx-text-fill: #602a01;
+
+}
+
+.combo-box:hover
+{
+    -fx-background-color: #d75c00;
+}
+
+.combo-box .list-cell
+{
+    -fx-background-color: #f9a86d;
+    -fx-text-fill: #602a01;
+}
+
+.combo-box .list-cell:hover
+{
+    -fx-background-color: #d75c00;
+}

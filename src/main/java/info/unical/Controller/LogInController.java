@@ -13,8 +13,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Vector;
 import java.util.concurrent.Callable;
@@ -156,6 +159,15 @@ public class LogInController {
                 SceneHandler.getInstance().setTestChoiceMenu();
             }
             else logInError("La password da te inserita potrebbe\nessere errata.");
+        }
+    }
+
+
+    @FXML
+    void sendByKey(KeyEvent event) throws Exception {
+        if (event.getCode() == KeyCode.ENTER)
+        {
+            logInUser();
         }
     }
 

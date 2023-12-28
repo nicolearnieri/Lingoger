@@ -13,10 +13,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
@@ -46,19 +53,29 @@ public class SignUpController {
     private PasswordField passwordField;
 
     @FXML
+    private Label passwordSuggestionLabel;
+    @FXML
+    private Label passwordSuggestionLabel2;
+
+    @FXML
     private Button registrationButton;
+
+    @FXML
+    private HBox passwordSuggestionBox;
+    @FXML
+    private StackPane stackPassword;
+
 
     @FXML
     private TextField seePField;
 
-    @FXML
-    private Label signUpClickableLabel;
 
     @FXML
     private TextField usernameField;
 
     @FXML
     private Button accessButton;
+
 
     static ObservableList<String> languageList = FXCollections.observableArrayList("Inglese","Francese", "Spagnolo", "Portoghese");
 
@@ -69,8 +86,24 @@ public class SignUpController {
 
     public void init()
    {
+       passwordSuggestionBox.setVisible(false);
        languageChooser.setItems(languageList);
        passwordFields();
+
+       passwordSuggestionLabel.setWrapText(true);
+       passwordSuggestionLabel.setText("La password deve contenere almeno 8 caratteri, di cui almeno una lettera maiuscola");
+       passwordSuggestionLabel2.setText("una minuscola, un numero e un carattere speciale tra $!€#*@?^%&");
+
+
+       stackPassword.setOnMouseEntered(e -> {
+           passwordSuggestionBox.setVisible(true);
+           passwordSuggestionBox.setManaged(true);
+       });
+
+       stackPassword.setOnMouseExited(e -> {
+           passwordSuggestionBox.setVisible(false);
+           passwordSuggestionBox.setManaged(false);
+       });
 
    }
 
@@ -195,6 +228,14 @@ public class SignUpController {
         }
         catch (Exception exc) {
             exc.printStackTrace(); }
+    }
+
+    @FXML
+    void sendByKey(KeyEvent event) throws IOException, ExecutionException, InterruptedException {
+        if (event.getCode() == KeyCode.ENTER)
+        {
+            registration(event);
+        }
     }
 
     @FXML
