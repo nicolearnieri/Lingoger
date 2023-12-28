@@ -1,6 +1,7 @@
 package info.unical.View;
 
 import info.unical.Controller.*;
+import info.unical.Model.ExecutorProvider;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,14 +33,26 @@ public class SceneHandler
 
     private String theme = "LingogerTheme";
 
+    private String themeForAlert = "LingogerThemeForAlert";
+
     private String font = "Font";
 
     private static SceneHandler instance = null;
 
+    private ExecutorService executor = ExecutorProvider.getExecutor();
 
     private SceneHandler() {}
 
-    public void init(Stage primaryStage) throws Exception { //metodo che puÃ² generare eccezione
+    public static SceneHandler getInstance()
+    {
+        if(instance == null)
+            instance = new SceneHandler();
+        return instance;
+    }
+
+
+    public void init(Stage primaryStage) throws Exception
+    {
         if(stage != null) return;
 
         stage = primaryStage;
@@ -53,25 +66,33 @@ public class SceneHandler
         stage.setScene(scene);
         stage.show();
 
+        terminateExec(stage);
     }
 
 
-    public static SceneHandler getInstance() {
-        if(instance == null)
-            instance = new SceneHandler();
-        return instance;
-    }
+
 
     public void closeStage(Stage myStage)
     {
         myStage.close();
     }
 
+    /*
     public void hideStage(Stage myStage){myStage.hide();}
 
     public void showStage(Stage myStage){myStage.show();}
 
+     */
 
+
+    private void terminateExec(Stage stage)
+    {
+        stage.setOnCloseRequest(e -> {
+            executor.shutdownNow();
+            Platform.exit();
+            System.exit(0);
+        });
+    }
 
     private void changedTheme(Scene scene) {
         setCSSForScene(scene);
@@ -82,21 +103,20 @@ public class SceneHandler
 
 
 
-    //aiuto
     private void setCSSForScene(Scene scene) { //in base a theme setta i css per la scena
         Objects.requireNonNull(scene);
         scene.getStylesheets().clear();
         scene.getStylesheets().add(getClass().getResource(CSS_PATH + theme + ".css").toExternalForm());
         scene.getStylesheets().add(String.valueOf(getClass().getResource(CSS_PATH + font + ".css")));
-
     }
 
     private void setCSSForAlert(Alert alert) {
         Objects.requireNonNull(alert, "Alert cannot be null");
         alert.getDialogPane().getStylesheets().clear();
-        alert.getDialogPane().getStylesheets().add(getClass().getResource(CSS_PATH + theme + ".css").toExternalForm());
+        alert.getDialogPane().getStylesheets().add(getClass().getResource(CSS_PATH + themeForAlert + ".css").toExternalForm());
     }
 
+    /*
     public void setStart() throws Exception {
         if(stage!=null) {stage.close();}
         stage = new Stage();
@@ -111,7 +131,7 @@ public class SceneHandler
         stage.setScene(scene);
         stage.show();
     }
-
+     */
 
     public void setLogIn() throws Exception {
         if(logInOrSignUpStage!=null) {logInOrSignUpStage.close();}
@@ -151,6 +171,7 @@ public class SceneHandler
         changedTheme(logInScene);
 
         logInOrSignUpStage.setTitle("Lingoger");
+
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
         logInOrSignUpStage.getIcons().add(icon); // Imposta l'icona per la finestra
 
@@ -161,23 +182,24 @@ public class SceneHandler
     }
 
 
-    public void showError(String message, String title) {
+    public void showError(String message, String title)
+    {
         alertError.setTitle(title);
         alertError.setHeaderText("");
         alertError.setContentText(message);
         alertError.getDialogPane().setPrefWidth(500);
         alertError.showAndWait();
-
-
     }
 
-    public void showInfo(String message, String title) {
+    public void showInfo(String message, String title)
+    {
         alertInfo.setTitle(title);
         alertInfo.setHeaderText("");
         alertInfo.setContentText(message);
         alertInfo.getDialogPane().setPrefWidth(500);
         alertInfo.show();
     }
+
     public boolean showConfirmation(String message, String title) {
         alertConfirmation.setTitle(title);
         alertConfirmation.setHeaderText("");
@@ -217,6 +239,7 @@ public class SceneHandler
         stage.show();
         controller.init();
 
+        terminateExec(stage);
     }
 
     public void setTestMenu(int i, String l) throws IOException, ExecutionException, InterruptedException {
@@ -235,6 +258,8 @@ public class SceneHandler
         stage.setScene(scene);
         stage.show();
         controller.initialize(i, l);
+
+        terminateExec(stage);
     }
 
     public void setResults(int correctAnswers) throws IOException {
@@ -253,6 +278,8 @@ public class SceneHandler
         stage.setScene(scene);
         stage.show();
         controller.init(correctAnswers);
+
+        terminateExec(stage);
     }
 
     public void setLesson(int finalI, String language) throws IOException, ExecutionException, InterruptedException {
@@ -272,5 +299,6 @@ public class SceneHandler
         stage.show();
         controller.init(finalI, language);
 
+        terminateExec(stage);
     }
 }

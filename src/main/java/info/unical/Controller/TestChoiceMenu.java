@@ -59,6 +59,7 @@ public class TestChoiceMenu {
 
     Vector<Callable<Integer>> tasks = new Vector<Callable<Integer>>();
     Vector<String> lessonInfos = new Vector<String>();
+    Vector<String> testInfos = new Vector<String>();
 
     Image fr = new Image(Objects.requireNonNull(getClass().getResource("/images/french-flag.png")).toExternalForm());
     Image eng = new Image(Objects.requireNonNull(getClass().getResource("/images/english-flag.png")).toExternalForm());
@@ -93,53 +94,58 @@ public class TestChoiceMenu {
         Callable<Integer> callable = null;  //la query che recupera il numero di test in base alla lingua dell'utente
         Callable<Integer> callable2 = null;  //la query che recupera il numero di test in base alla lingua dell'utente
         Callable<Vector<String>> infosCallable = null;
+        Callable<Vector<String>> infosCallable2 = null;
 
         if (user.getLanguage().equals( "Inglese"))
         {
             callable = QueryCreator.createRetrieveTestsEnglishCallable();
             callable2 = QueryCreator.createRetrieveEnglishLessonsCallable();
             infosCallable= QueryCreator.createRetrieveEnglishDescriptionCallable();
-
+            infosCallable2 = QueryCreator.createRetrieveTestInfosEnglishCallable();
         }
         else if (user.getLanguage().equals( "Francese"))
         {
             callable = QueryCreator.createRetrieveTestsFrenchCallable();
             callable2 = QueryCreator.createRetrieveFrenchLessonsCallable();
             infosCallable= QueryCreator.createRetrieveFrenchDescriptionCallable();
+            infosCallable2 = QueryCreator.createRetrieveTestInfosFrenchCallable();
         }
         else if (user.getLanguage().equals("Spagnolo"))
         {
             callable = QueryCreator.createRetrieveTestsSpanishCallable();
-            callable2= QueryCreator.createRetrieveSpanishLessonsCallable();
-            infosCallable= QueryCreator.createRetrieveSpanishDescriptionCallable();
+            callable2 = QueryCreator.createRetrieveSpanishLessonsCallable();
+            infosCallable = QueryCreator.createRetrieveSpanishDescriptionCallable();
+            infosCallable2 = QueryCreator.createRetrieveTestInfosSpanishCallable();
         }
         else if (user.getLanguage().equals("Portoghese"))
         {
             callable = QueryCreator.createRetrieveTestsPortugueseCallable();
             callable2 = QueryCreator.createRetrievePortugueseLessonsCallable();
             infosCallable= QueryCreator.createRetrievePortugueseDescriptionCallable();
-
+            infosCallable2 = QueryCreator.createRetrieveTestInfosPortugueseCallable();
         }
 
         tasks.add(callable);
         tasks.add(callable2);
-        settingTests();
-
-        Future<Vector<String>> future = executor.submit(infosCallable);
-        lessonInfos = future.get();
+        settingTests(infosCallable2);
 
 
-        settingLessons();
 
+
+
+        settingLessons(infosCallable);
     }
 
-    void settingLessons() throws ExecutionException, InterruptedException {
+    void settingLessons(Callable<Vector<String>> callable) throws ExecutionException, InterruptedException {
+
+        Future<Vector<String>> future = executor.submit(callable);
+        lessonInfos = future.get();
+
         lessonVbox.getChildren().clear();
         lessonVbox.getChildren().add(new Label("Lezioni"));
 
         Future<Integer> res = executor.submit(tasks.get(1));
         int result = res.get();
-        System.out.println(result);
 
         if (result != -1)
         {
@@ -147,7 +153,7 @@ public class TestChoiceMenu {
             {
                 HBox hBox = new HBox();
                 Label label = new Label(lessonInfos.get(i-1));
-                label.setPrefSize(330, 35 );
+                label.setPrefSize(300, 35 );
                 hBox.getChildren().add(label);
 
                 Button button = new Button("Lezione " + (i));
@@ -172,27 +178,33 @@ public class TestChoiceMenu {
                 lessonVbox.getChildren().add(hBox);
             }
         }
-
     }
 
-
-
-    void settingTests() throws ExecutionException, InterruptedException
+    void settingTests(Callable<Vector<String>> callable) throws ExecutionException, InterruptedException
     {
+        Future<Vector<String>> future2 = executor.submit(callable);
+        testInfos = future2.get();
+
         testVbox.getChildren().clear();
         testVbox.getChildren().add(new Label("Test"));
 
         Future<Integer> res = executor.submit(tasks.get(0));
         int result = res.get();
-        System.out.println(result);
 
         if (result != -1)
         {
             for (int i= 1; i<= result; i++ )
             {
+                HBox hBox = new HBox();
+
+                Label label = new Label(testInfos.get(i-1));
+                label.setPrefSize(300, 35 );
+                hBox.getChildren().add(label);
+
                 Button button = new Button("Test " + (i));
                 button.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff ");
                 button.setPrefSize(100, 35);
+                hBox.getChildren().add(button);
 
                 int finalI = i;
                 button.setOnMouseClicked(event -> {
@@ -207,10 +219,9 @@ public class TestChoiceMenu {
                         throw new RuntimeException(e);
                     }
                 });
-                testVbox.getChildren().add(button);
+                testVbox.getChildren().add(hBox);
             }
         }
-
     }
 
     void generateTest(int i, String language) throws IOException, ExecutionException, InterruptedException {
@@ -223,7 +234,7 @@ public class TestChoiceMenu {
 
     @FXML
     void englishLanguage(ActionEvent event) throws ExecutionException, InterruptedException {
-        if (user.getLanguage() != "Inglese")
+        if (!  user.getLanguage().equals("Inglese"))
         {
             Callable<Boolean> updateTask = QueryCreator.createUpdateOnUser(user.getNomeUtente(), "Inglese");
             Future<Boolean> future = executor.submit(updateTask);
@@ -236,7 +247,7 @@ public class TestChoiceMenu {
 
     @FXML
     void frenchLanguage(ActionEvent event) throws ExecutionException, InterruptedException {
-        if (user.getLanguage() != "Francese")
+        if (! user.getLanguage().equals ("Francese"))
         {
             Callable<Boolean> updateTask = QueryCreator.createUpdateOnUser(user.getNomeUtente(), "Francese");
             Future<Boolean> future = executor.submit(updateTask);
@@ -249,7 +260,7 @@ public class TestChoiceMenu {
 
     @FXML
     void portugueseLanguage(ActionEvent event) throws ExecutionException, InterruptedException {
-        if (user.getLanguage() != "Portoghese")
+        if (! user.getLanguage().equals("Portoghese"))
         {
             Callable<Boolean> updateTask = QueryCreator.createUpdateOnUser(user.getNomeUtente(), "Portoghese");
             Future<Boolean> future = executor.submit(updateTask);
@@ -263,7 +274,7 @@ public class TestChoiceMenu {
 
     @FXML
     void spanishLanguage(ActionEvent event) throws ExecutionException, InterruptedException {
-        if (user.getLanguage() != "Spagnolo")
+        if (! user.getLanguage().equals("Spagnolo"))
         {
             Callable<Boolean> updateTask = QueryCreator.createUpdateOnUser(user.getNomeUtente(), "Spagnolo");
             Future<Boolean> future = executor.submit(updateTask);

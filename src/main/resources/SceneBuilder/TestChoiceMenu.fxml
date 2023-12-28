@@ -67,11 +67,17 @@
                <children>
                   <Label text="Lezioni" />
                </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </VBox>
             <VBox fx:id="testVbox" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="425.0" spacing="10.0">
                <children>
                   <Label text="Test" />
                </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </VBox>
          </children>
       </HBox>
