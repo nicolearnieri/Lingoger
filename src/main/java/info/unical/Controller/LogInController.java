@@ -44,6 +44,9 @@ public class LogInController {
     private Button registrationButton;
 
     @FXML
+    private Button passwordButton;
+
+    @FXML
     private TextField usernameOrEmailField;
 
     Image openEye = new Image(Objects.requireNonNull(getClass().getResource("/images/open_eye.png")).toExternalForm());
@@ -114,7 +117,7 @@ public class LogInController {
             Future<Boolean> result = executor.submit(userCallable);
             Boolean res = result.get();
             if (res)
-                logInError("Il nome utente inserito non è associato a nessun acoount esistente."); //il nome utente non esiste
+                logInError("Il nome utente inserito non è associato a nessun account esistente."); //il nome utente non esiste
             else userExists = true;
         }
 
@@ -164,12 +167,19 @@ public class LogInController {
 
 
     @FXML
-    void sendByKey(KeyEvent event) throws Exception {
+    void sendByKey(KeyEvent event) throws Exception
+    {
         if (event.getCode() == KeyCode.ENTER)
         {
             logInUser();
         }
     }
+
+    @FXML
+    void recoverPassword(ActionEvent event) throws IOException {
+        SceneHandler.getInstance().setRetrievePassword();
+    }
+
 
 
 }

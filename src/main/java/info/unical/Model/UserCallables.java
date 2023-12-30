@@ -235,3 +235,58 @@ class UpdateOnUserCallable implements Callable<Boolean>  {
 
     }
 }
+
+
+class FindUserCallable implements Callable<Boolean>  {
+    private String user, email;
+
+    public FindUserCallable(String user, String email) {
+        this.user = user;
+        this.email = email;
+    }
+
+    @Override
+    public Boolean call() throws Exception {
+        String query = "SELECT COUNT(*) FROM user WHERE username = ? and email = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, user);
+            preparedStatement.setString(2, email);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count == 1;
+                }
+            }
+            finally {
+                DataBaseManager.closeConnection();
+            }
+        }
+        return false;
+    }
+}
+
+class UpdateUserPasswordCallable implements Callable<Boolean>  {
+    private String user, password;
+
+    public UpdateUserPasswordCallable(String user, String password) {
+        this.user = user;
+        this.password = password;
+    }
+
+    @Override
+    public Boolean call() throws Exception {
+        String query = "UPDATE user SET password = ? WHERE username = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, user);
+            preparedStatement.executeUpdate();
+            System.out.println(preparedStatement.executeUpdate() + " rows updated");
+            return true;
+        } finally {
+            DataBaseManager.closeConnection();
+        }
+
+    }
+}

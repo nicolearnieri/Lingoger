@@ -57,7 +57,8 @@ public class TestMediator {
     }
 
     public void setButtons(Button b1, Button b2, Button b3, Button b4, Button b5, Button b6, Button b7, Button b8,
-            Button b9, Button confirmationButton) {
+            Button b9, Button confirmationButton) //metodo che imposta lo stile dei vari bottoni, perchè se l'avessi fatto con css non avrei potuto cambiare lo stile da codice
+    {
         this.b1 = b1;
         b1.setStyle("-fx-background-color: #d75c00; -fx-text-fill: #ffffff");
         this.b2 = b2;
@@ -83,7 +84,6 @@ public class TestMediator {
 
     public void newClick(ActionEvent event) {
         Button buttonIJustClicked = (Button) event.getSource(); //mi prendo il bottone che ho cliccato dall'evento (il click)
-        //int newAnswer = buttonToNumber.get(buttonIJustClicked); //mi prendo il valore associato al bottone che ho cliccato
         String answer = buttonIJustClicked.getText(); //mi prendo il testo del bottone che ho cliccato
 
         int question; // mi setto un valore per capire quale bottone è stato cliccato, in modo da capire a che domanda si sta rispondendo
@@ -96,10 +96,10 @@ public class TestMediator {
             question = 3;
         }
 
-        if (answers.containsKey(question))
+        if (answers.containsKey(question)) //se ho già risposto a questa domanda, quindi è nella mappa
         {
             String oldAnswer = answers.get(question);
-            if (answer.equals(oldAnswer))
+            if (answer.equals(oldAnswer)) //la risposta che ho dato è la stessa che avevo dato prima, quindi la tolgo dalla mappa (l'ho deselezionata
             {
                 answers.remove(question);
                 buttonIJustClicked.setStyle("-fx-background-color: #d75c00; ; -fx-text-fill: #ffffff");
@@ -163,7 +163,7 @@ public class TestMediator {
 
         buttonIJustClicked.setStyle("-fx-background-color: #ffffff; -fx-border-color: #d75c00; -fx-border-width: 2px; -fx-text-fill: #d75c00"); //è cambiato lol
 
-        actionOnConfirm(); //controllo se sono state date tutte le risposte
+        actionOnConfirm(); //controllo se sono state date tutte le risposte e setto il button di conferma
     }
 
     public boolean isReady() {

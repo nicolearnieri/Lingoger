@@ -53,21 +53,38 @@
                   <ImageView fx:id="image" fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="82.0" prefWidth="480.0">
+            <HBox alignment="CENTER" prefHeight="63.0" prefWidth="510.0">
                <children>
                   <Button fx:id="logButton" mnemonicParsing="false" onAction="#logInUser" prefHeight="35.0" prefWidth="100.0" text="Accedi" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <VBox prefHeight="106.0" prefWidth="510.0">
                <children>
-                  <Label text="Non hai un profilo?" />
-                  <Button fx:id="registrationButton" mnemonicParsing="false" onAction="#openSignUp" text="Registrati">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Button>
+                  <HBox alignment="CENTER" prefHeight="41.0" prefWidth="510.0">
+                     <children>
+                        <Label text="Non hai un profilo?" />
+                        <Button fx:id="registrationButton" mnemonicParsing="false" onAction="#openSignUp" text="Registrati">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Oppure recupera la tua password:" />
+                        <Button fx:id="passwordButton" mnemonicParsing="false" onAction="#recoverPassword" text="Recupera">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
          </children>
       </VBox>
    </center>

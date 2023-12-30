@@ -244,6 +244,18 @@ import java.util.concurrent.Callable;
         	return callable;
         }
 
+        public static Callable<Boolean> createFindUserCallable(String username, String email)
+        {
+        	FindUserCallable callable = new FindUserCallable(username, email);
+        	return callable;
+        }
+
+        public static Callable<Boolean> createUpdatePasswordCallable(String username, String password)
+        {
+        	UpdateUserPasswordCallable callable = new UpdateUserPasswordCallable(username, password);
+        	return callable;
+        }
+
     }
 
 

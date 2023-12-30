@@ -301,4 +301,27 @@ public class SceneHandler
 
         terminateExec(stage);
     }
+
+    public void setRetrievePassword() throws IOException {
+        if(logInOrSignUpStage!=null) {logInOrSignUpStage.close();}
+        logInOrSignUpStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "RetrievePassword.fxml"));
+
+        logInScene = new Scene(loader.load(), 600, 400); //v:larghezza, v1:altezza
+
+        logInOrSignUpStage.initModality(Modality.APPLICATION_MODAL); // Imposta la finestra come modale, quindi non permette di interagire con altre finestre
+
+        RetrievePasswordController controller= loader.getController();
+
+        changedTheme(logInScene);
+
+        logInOrSignUpStage.setTitle("Lingoger");
+
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Isabelle.png")));// Carica l'immagine dell'icona
+        logInOrSignUpStage.getIcons().add(icon); // Imposta l'icona per la finestra
+
+        logInOrSignUpStage.setScene(logInScene);
+        logInOrSignUpStage.setResizable(false);
+        logInOrSignUpStage.show();
+    }
 }
