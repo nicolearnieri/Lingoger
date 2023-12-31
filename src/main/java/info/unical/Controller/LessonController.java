@@ -37,6 +37,8 @@ public class LessonController {
         Vector<String> infos = null;
         currentLesson = finalI;
 
+
+        //recupera la lezione finalI in base alla lingua (i codici sono univoci per tabella, non in tutto il db)
         if (language.equals("Inglese"))
         { callable = QueryCreator.createRetrieveEnglishLessonInfoCallable(finalI); }
         else if ( language.equals("Francese"))

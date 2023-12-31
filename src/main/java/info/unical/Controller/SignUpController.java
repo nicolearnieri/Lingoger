@@ -214,7 +214,7 @@ public class SignUpController {
 
                 String passwordEncoded= BCrypt.hashpw(password, BCrypt.gensalt(12)); //CODIFICA PASSWORD
                 Callable<Boolean> insTask = QueryCreator.createInsertUser(username, email, passwordEncoded, language);
-                Future<Boolean> insRes = executor.submit(insTask);//oggetto prodotto da un'operazione asincrona
+                Future<Boolean> insRes = executor.submit(insTask);
                 res = insRes.get();
                 if (res)
                 { //messaggio avviso che la registrazione è andata a buon fine e il profilo può essere completato da impostazioni

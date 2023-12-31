@@ -105,26 +105,22 @@ public class TestController {
         }
 
 
-        //executor.submit(callableForQ);
+
         Future<Vector<Object>> resQ = executor.submit(callableForQ);
         Vector<Object> resultQ = resQ.get();
-        System.out.println(resultQ.size());
 
         question1.setText((String) resultQ.get(0));
         answers.add((String) resultQ.get(2));
-        System.out.println(answers.get(0));
 
         question2.setText((String) resultQ.get(3));
         answers.add((String) resultQ.get(5));
-        System.out.println(answers.get(1));
 
         question3.setText((String) resultQ.get(6));
         answers.add((String) resultQ.get(8));
-        System.out.println(answers.get(2));
 
-        //executor.submit(callableForA);
         Future<Vector<String>> resA = executor.submit(callableForA);
         Vector<String> resultA = resA.get();
+
         mediator.setButtonsValues(resultA);
 
     }

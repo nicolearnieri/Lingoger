@@ -2,14 +2,14 @@
     -fx-background-color: #fef3eb;
 }
 
-#logButton, #logInButton, #accessButton, #registrationButton, #signUpButton, #closeButton, #noButton, #confirmationButton, #passwordButton
+#logButton, #logInButton, #accessButton, #registrationButton, #signUpButton, #closeButton, #noButton, #confirmationButton, #passwordButton, #logOutButton
 {
     -fx-background-color: #d75c00;
     -fx-text-fill: #ffdcc9;
 
 }
 
-#logButton :hover, #logInButton:hover, #accessButton:hover, #registrationButton:hover, #signUpButton:hover, #closeButton :hover,  #noButton:hover, #confirmationButton:hover, #passwordButton:hover
+#logButton :hover, #logInButton:hover, #accessButton:hover, #registrationButton:hover, #signUpButton:hover, #closeButton :hover,  #noButton:hover, #confirmationButton:hover, #passwordButton:hover, #logOutButton:hover
 {
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0);
 }

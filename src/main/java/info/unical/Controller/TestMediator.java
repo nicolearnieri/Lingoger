@@ -23,9 +23,8 @@ public class TestMediator {
     private static TestMediator instance = null; //singleton
     private Button b1, b2, b3, b4, b5, b6, b7, b8, b9, confirmationButton; //bottoni delle risposte, il mediatore deve avere un riferimento
 
-    Map<Integer, Integer> map = new HashMap<>(); //mappa per le risposteù
     Map<Integer, String> answers  = new HashMap<>(); //mappa per le risposte
-    Map<Button, Integer> buttonToNumber = new HashMap<>();
+    Map<Button, Integer> buttonToNumber = new HashMap<>(); //ad ogni bottone è associato un numero, per capire a quale domanda si sta rispondendo e come
 
     private ExecutorService executor = ExecutorProvider.getExecutor();
     private User user = User.getInstance();
@@ -89,11 +88,11 @@ public class TestMediator {
         int question; // mi setto un valore per capire quale bottone è stato cliccato, in modo da capire a che domanda si sta rispondendo
 
         if (buttonIJustClicked == b1 || buttonIJustClicked == b2 || buttonIJustClicked == b3) {
-            question = 1;
+            question = 1; //risposta alla domanda 1
         } else if (buttonIJustClicked == b4 || buttonIJustClicked == b5 || buttonIJustClicked == b6) {
-            question = 2;
+            question = 2; //risposta alla domanda 2
         } else {
-            question = 3;
+            question = 3; //risposta alla domanda 3
         }
 
         if (answers.containsKey(question)) //se ho già risposto a questa domanda, quindi è nella mappa
@@ -161,6 +160,7 @@ public class TestMediator {
             answers.put(question, answer); //aggiungo la risposta alla domanda
         }
 
+        //selezione del nuovo button a livello grafico
         buttonIJustClicked.setStyle("-fx-background-color: #ffffff; -fx-border-color: #d75c00; -fx-border-width: 2px; -fx-text-fill: #d75c00"); //è cambiato lol
 
         actionOnConfirm(); //controllo se sono state date tutte le risposte e setto il button di conferma

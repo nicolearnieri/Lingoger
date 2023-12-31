@@ -41,7 +41,7 @@ public class RetrievePasswordController {
     Random random = new Random();
 
 
-    public String createPw ()
+    public String createPw () //metodo che crea una nuova password casuale
     {
         StringBuilder password = new StringBuilder(8);
 
@@ -50,12 +50,11 @@ public class RetrievePasswordController {
         password.append(numeri.charAt(random.nextInt(numeri.length())));
         password.append(speciali.charAt(random.nextInt(speciali.length())));
 
-        for (int i = 4; i < 8; i++) {
-            password.append(caratteri.charAt(random.nextInt(caratteri.length())));
-    }
+        for (int i = 4; i < 8; i++)
+            { password.append(caratteri.charAt(random.nextInt(caratteri.length()))); }
 
-            return password.toString();
-        }
+        return password.toString();
+    }
 
 
     @FXML
@@ -82,6 +81,7 @@ public class RetrievePasswordController {
 
     @FXML
     void noButtonClicked(ActionEvent event) throws Exception {
+        //click sul button "annulla"
         SceneHandler.getInstance().setLogIn();
     }
 

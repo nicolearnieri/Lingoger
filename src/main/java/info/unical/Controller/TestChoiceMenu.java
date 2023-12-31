@@ -52,10 +52,13 @@ public class TestChoiceMenu {
     @FXML
     private VBox lessonVbox;
 
+    @FXML
+    private Button logOutButton;
+
     private ExecutorService executor = ExecutorProvider.getExecutor();
 
     User user = User.getInstance();
-    TestController testController = TestController.getInstance();
+
 
     Vector<Callable<Integer>> tasks = new Vector<Callable<Integer>>();
     Vector<String> lessonInfos = new Vector<String>();
@@ -92,10 +95,11 @@ public class TestChoiceMenu {
 
     void generateCallablesForCounts() throws ExecutionException, InterruptedException {
         Callable<Integer> callable = null;  //la query che recupera il numero di test in base alla lingua dell'utente
-        Callable<Integer> callable2 = null;  //la query che recupera il numero di test in base alla lingua dell'utente
-        Callable<Vector<String>> infosCallable = null;
-        Callable<Vector<String>> infosCallable2 = null;
+        Callable<Integer> callable2 = null;  //la query che recupera il numero di lezioni in base alla lingua dell'utente
+        Callable<Vector<String>> infosCallable = null; //descrizioni delle lezioni
+        Callable<Vector<String>> infosCallable2 = null; //descrizioni dei test
 
+        //in base alla lingua genero le query
         if (user.getLanguage().equals( "Inglese"))
         {
             callable = QueryCreator.createRetrieveTestsEnglishCallable();
@@ -127,11 +131,8 @@ public class TestChoiceMenu {
 
         tasks.add(callable);
         tasks.add(callable2);
+
         settingTests(infosCallable2);
-
-
-
-
 
         settingLessons(infosCallable);
     }
@@ -301,6 +302,13 @@ public class TestChoiceMenu {
             spanishImage();
         }
         generateCallablesForCounts();
+    }
+
+    @FXML
+    public void logOutClicked (ActionEvent event) throws Exception {
+        user.logOut();
+        SceneHandler.getInstance().closeStage();
+        SceneHandler.getInstance().setStart();
     }
 
 }

@@ -77,12 +77,6 @@ public class SceneHandler
         myStage.close();
     }
 
-    /*
-    public void hideStage(Stage myStage){myStage.hide();}
-
-    public void showStage(Stage myStage){myStage.show();}
-
-     */
 
 
     private void terminateExec(Stage stage)
@@ -116,7 +110,7 @@ public class SceneHandler
         alert.getDialogPane().getStylesheets().add(getClass().getResource(CSS_PATH + themeForAlert + ".css").toExternalForm());
     }
 
-    /*
+
     public void setStart() throws Exception {
         if(stage!=null) {stage.close();}
         stage = new Stage();
@@ -130,8 +124,10 @@ public class SceneHandler
         stage.getIcons().add(icon); // Imposta l'icona per la finestra
         stage.setScene(scene);
         stage.show();
+
+        terminateExec(stage);
     }
-     */
+
 
     public void setLogIn() throws Exception {
         if(logInOrSignUpStage!=null) {logInOrSignUpStage.close();}
@@ -240,6 +236,11 @@ public class SceneHandler
         controller.init();
 
         terminateExec(stage);
+    }
+
+    public void closeStage()
+    {
+        if(stage!=null) {stage.close();}
     }
 
     public void setTestMenu(int i, String l) throws IOException, ExecutionException, InterruptedException {

@@ -54,7 +54,7 @@ public class LogInController {
 
     private ExecutorService executor = ExecutorProvider.getExecutor();
 
-    public void init() { passwordFields(); }
+    public void init() { passwordFields(); } //fa il binding per rendere visibile la password
 
 
     private void passwordFields()
@@ -98,7 +98,7 @@ public class LogInController {
     public void logInUser () throws Exception {
         String user = usernameOrEmailField.getText();
         String password = passwordField.getText();
-        boolean email = ValidatorUtility.isValidEmail(user);
+        boolean email = ValidatorUtility.isValidEmail(user); //verifico se l'utente ha inserito un'email (in alternativa un nome utente)
         boolean userExists = false;
 
 
